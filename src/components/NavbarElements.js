@@ -2,14 +2,13 @@ import { NavLink as Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Container from 'react-bootstrap/Container'
 import Navbar from 'react-bootstrap/Navbar';
-import Logo from '../images/logofix.png';
+import Logo from '../images/cat.png';
 
 export const Nav = styled.nav`
   background-color: #ADD8E6;
   display: flex;
   justify-content: space-between;
-  /*padding: 0.7rem calc((100vw - 1000px) / 2);*/
-  padding:1px;
+  padding: 0.7rem calc((100vw - 1000px) / 2);
   padding-left:  3.5rem;
   padding-right: 2rem;
   z-index: 12;
@@ -38,8 +37,6 @@ export const NavLink = styled(Link)`
   }
 `;
 
-
-
 export const NavMenu = styled.div`
   display: flex;
   align-items: center;
@@ -64,7 +61,7 @@ export const NavBrand = ()=>{
     <>
     <Navbar.Brand>
       <Link to="/">
-      <img width='100px' className="img-responsive" src={Logo} alt="logo" />
+      <img width='45px' className="img-responsive" src={Logo} alt="logo" />
 
       </Link>
     </Navbar.Brand>

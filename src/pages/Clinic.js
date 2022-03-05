@@ -19,15 +19,11 @@ export const Paging = styled(Pagination)`
 
 `;
 
-const Clinic = ({Name, Phone_Number, Address, Website})=>{
+const Clinic = ({id,name, phone_number, address, website})=>{
 
     const url = 'https://be0e-103-108-21-100.ngrok.io/clinic';
-    /*https://a1b9-103-108-23-25.ngrok.io/clinic*/
-    /*http://jsonplaceholder.typicode.com/users*/
     const [search,setSearch]= useState('');
     const [load,setLoad]= useState(true);
-
-
 
     const fetchClinic = async () =>{
       setLoad(true);
@@ -54,13 +50,9 @@ const Clinic = ({Name, Phone_Number, Address, Website})=>{
     }
 
     const handleKeyDown = (e) => {
-    /*setClinic(temp);*/
     if (e.key === 'Enter') {
       handlePost();
-
-
       console.log('do validate');
-      /*searching(nama);*/
 
     }
   }
@@ -81,7 +73,6 @@ const Clinic = ({Name, Phone_Number, Address, Website})=>{
   }
 
     const [clinic,setClinic] = useState([]);
-    const [temp, setTemp] = useState([]);
     const [nama, setNama] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage] = useState(10);
@@ -92,30 +83,11 @@ const Clinic = ({Name, Phone_Number, Address, Website})=>{
 
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
-    const searching = (name) => {
+    /*const searching = (name) => {
 
       const newClinic = clinic.filter((clinicss)=>clinicss.name==Location);
       setClinic(newClinic);
-    }
-
-
-  /*const fetchData = () => {
-  return fetch("http://jsonplaceholder.typicode.com/users")
-        .then((response) => response.json())
-        .then((data) => setClinic(data));}
-
-  useEffect(() => {
-          fetchData();
-        }, []);*/
-
-    const fetchTemp = () => {
-    return fetch("http://jsonplaceholder.typicode.com/users")
-            .then((response) => response.json())
-            .then((data) => setTemp(data));}
-
-    useEffect(() => {
-            fetchTemp();
-            }, []);
+    }*/
 
     return(
 
@@ -124,10 +96,9 @@ const Clinic = ({Name, Phone_Number, Address, Website})=>{
     <div style={{display: 'flex', justifyContent: 'center'}}>
     <DivSearch style={{display: 'flex', justifyContent: 'center'}}>
       <Img src={searchIcon}/>
-      <SearchInput type='text' placeholder='Cari Lokasi' nama={Name} onKeyDown={handleKeyDown} onChange={(event)=>{
+      <SearchInput type='text' placeholder='Cari Lokasi' onKeyDown={handleKeyDown} onChange={(event)=>{
         handle(event)
         }
-        /*setNama(event.target.value)*/
       }
       />
     </DivSearch>
@@ -139,12 +110,12 @@ const Clinic = ({Name, Phone_Number, Address, Website})=>{
     {load && (<Loading></Loading>)}
 
     {currentPosts.map((currentPosts)=>{
-    const {Name, Phone_Number, Address, Website} = currentPosts;
+    const {id, name, phone_number, address, website} = currentPosts;
     return <Card key={currentPosts.id} {...currentPosts}>
-    <h5>{Name}</h5>
-    {Phone_Number} <br/>
-    {Address}
-    <a target="_blank" href={Website}> Lihat di map</a>
+    <h5>{name}</h5>
+    {phone_number} <br/>
+    {address}
+    <a target="_blank" href={website}> Lihat di map</a>
     </Card>
     })}
 

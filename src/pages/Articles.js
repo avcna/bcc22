@@ -25,11 +25,12 @@ export const Button = styled.button`
 
   &:hover{
     background-color: #cbecf7;
+    box-shadow: none;
   }
 `;
 
 export const Kategori = styled.div`
-  margin: 3.875rem 133px 0;
+  padding: 3.875rem 133px 0;
 `;
 
 
@@ -44,7 +45,7 @@ const Articles =()=>{
       </DivSearch>
       </div>
       <Kategori>
-        <h3>Kategori</h3>
+        <Title>Kategori</Title>
         <Button>Kucing</Button>
         <Button>Anjing</Button>
         <Button>Kelinci</Button>
@@ -57,13 +58,15 @@ const Articles =()=>{
         <Button>Burung</Button>
       </Kategori>
       </section>
-      <Section>
+      <section>
+      <Kategori>
         <Title>Artikel Terkini</Title>
+      </Kategori>
         <ArticleCard>
           test
         </ArticleCard>
-      </Section>
       <Footer/>
+      </section>
 
     </>
   )

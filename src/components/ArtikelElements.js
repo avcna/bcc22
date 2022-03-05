@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import ArtCard from './ArtikelElement';
+import '../App.css';
+import Carousel from 'react-bootstrap/Carousel';
 
 export const ArticleCard = styled.div`
   background-color: #cbecf7;
@@ -8,30 +10,32 @@ export const ArticleCard = styled.div`
   margin: 0 133px 1.5rem;
 `;
 
-export const Carousel=()=>{
+export const CarItem = styled.div`
+  margin: 0 12rem;
+  background-color:#cbecf7;
+  padding: 2rem 6rem;
+`;
+
+export const Carouseli=()=>{
   return(
     <>
-    <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
-<div className="carousel-inner">
-  <div className="carousel-item active">
-    <ArtCard/>
-  </div>
-  <div className="carousel-item">
-    <ArtCard/>
-  </div>
-  <div className="carousel-item">
-    <ArtCard/>
-  </div>
-</div>
-<button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-  <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-  <span className="visually-hidden">Previous</span>
-</button>
-<button className="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-  <span className="carousel-control-next-icon" aria-hidden="true"></span>
-  <span className="visually-hidden">Next</span>
-</button>
-</div>
+    <Carousel>
+  <Carousel.Item>
+    <CarItem>
+    test
+    </CarItem>
+  </Carousel.Item>
+  <Carousel.Item>
+  <CarItem>
+  test
+  </CarItem>
+  </Carousel.Item>
+  <Carousel.Item>
+  <CarItem>
+  test
+  </CarItem>
+  </Carousel.Item>
+</Carousel>
 </>
   )
 }

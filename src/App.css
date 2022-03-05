@@ -157,3 +157,11 @@ b{
 .pagination{
   margin: 0 auto;
 }
+
+.carousel-control-prev{
+  margin-left: 8rem;
+}
+
+.carousel-control-next{
+  margin-right: 8rem;
+}

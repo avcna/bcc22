@@ -9,9 +9,12 @@ import Foto1 from '../images/foto1.png';
 import Foto2 from '../images/foto2.png';
 import Foto3 from '../images/foto3.png';
 import Kucing from '../images/kucing.png';
-import {Carousel} from '../components/ArtikelElements';
-import {Section} from '../components/Basic';
+import {Carouseli} from '../components/ArtikelElements';
 
+export const Section = styled.section`
+  background-color:#F9F9F9;
+  padding: 0 0 5rem;
+`;
 
 const Home =() =>{
   return(
@@ -76,7 +79,7 @@ const Home =() =>{
       <img className='kucing' src={Kucing}/>
     </section>
     <Section>
-      <Carousel/>
+      <Carouseli/>
     </Section>
     <Footer/>
     </>
