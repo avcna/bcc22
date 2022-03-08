@@ -1,5 +1,22 @@
 import React from 'react';
 import '../App.css';
+import styled from 'styled-components';
+
+export const A = styled.a`
+  color: #FFB703;
+  font-family: Poppins;
+
+  &.active{
+    background-color: #FFB703;
+    color: white;
+    }
+
+  &:hover{
+    background-color: #FFB703;
+    color: white;
+    }
+
+`;
 
 const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
   const pageNumbers = [];
@@ -13,9 +30,9 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
       <ul className='pagination' >
         {pageNumbers.map(number => (
           <li key={number} className='page-item'>
-            <a onClick={() => paginate(number)} href='#' className='page-link'>
+            <A onClick={() => paginate(number)} href='#' className='page-link'>
               {number}
-            </a>
+            </A>
           </li>
         ))}
       </ul>

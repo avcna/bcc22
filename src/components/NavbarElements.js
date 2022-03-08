@@ -5,20 +5,17 @@ import Navbar from 'react-bootstrap/Navbar';
 import Logo from '../images/cat.png';
 
 export const Nav = styled.nav`
-  background-color: #ADD8E6;
+  background-color: white;
   display: flex;
   justify-content: space-between;
   padding: 0.7rem calc((100vw - 1000px) / 2);
   padding-left:  3.5rem;
   padding-right: 2rem;
   z-index: 12;
-  /* Third Nav */
-  /* justify-content: flex-end; */
-  /* position: fixed; */
 `;
 
 export const NavLink = styled(Link)`
-  color: #808080;
+  color: #000;
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -29,11 +26,12 @@ export const NavLink = styled(Link)`
   position: static;
 
   &.active {
-    color: #658F9C;
+    font-weight: bold;
+    color:#000;
   }
 
   &:hover{
-    color:#cbecf7;
+    color:#FFB703;
   }
 `;
 
@@ -41,19 +39,21 @@ export const NavMenu = styled.div`
   display: flex;
   align-items: center;
   margin-right: 5rem;
-  /* Second Nav */
-  margin-right: 1.75rem;
-  /* Third Nav */
-  /* width: 100vw;
-  white-space: nowrap; */
   @media screen and (max-width: 48rem) {
     display: none;
   }
 `;
 
-export const SubNav = styled.section`
-  height: 4.088rem;
-  background-color: #f8f4fc;
+export const NavMenu2 = styled.div`
+  display: flex;
+  align-items: center;
+  margin-right: 5rem;
+  margin-right: 1.75rem;
+  justify-content: flex-end;
+  width: 80px;
+  @media screen and (max-width: 30rem) {
+    display: none;
+  }
 `;
 
 export const NavBrand = ()=>{

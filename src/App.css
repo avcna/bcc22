@@ -32,6 +32,9 @@ color: #373F41;
   weight: 400;
 }
 
+.nav-link2{
+  justify-content: center;
+}
 
 .App {
   font-family: 'Mulish', sans-serif;
@@ -41,7 +44,7 @@ color: #373F41;
 }
 
 section{
-  background-color:#F9F9F9;
+  background-color:white;
 }
 .center-txt{
   text-align: center;
@@ -71,14 +74,14 @@ section{
   border-radius: 1rem;
   border: none;
   padding: 0.4rem 2rem;
-  background-color: #ADD8E6;
+  background-color: #FFB703;
   box-shadow: 4px 8px 10px 0px #00000040;
   font-family: 'Poppins', sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 1.75rem;
   line-height: 2.625rem;
-  color: #373F41;
+  color: white;
   letter-spacing: 0.2px;
   position: relative;
   left: 10rem;

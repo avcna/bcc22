@@ -13,6 +13,6 @@ export const Title = styled.h3`
 `;
 
 export const Section = styled.section`
-  background-color:#F9F9F9;
+  background-color:#fff;
   padding: 5rem 0 2rem;
 `;

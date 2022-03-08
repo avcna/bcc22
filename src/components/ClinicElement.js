@@ -5,7 +5,8 @@ import App from '../App';
 export const Card = styled.section`
   font-size: 16px;
   padding: 29px 40px 49px 40px;
-  background-color: #C4C4C4;
+  background-color: #023047;
+  color:white;
   margin: 0 165px 30px;
   font-family: Poppins;
 `;

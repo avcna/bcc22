@@ -4,9 +4,11 @@ import Footer from '../components/Footer';
 import {Section, Title} from '../components/Basic';
 import {ArticleCard} from '../components/ArtikelElements';
 import styled from 'styled-components';
+import {useEffect, useState} from "react";
+import Axios from 'axios';
 
 export const Button = styled.button`
-  background-color: #ADD8E6;
+  background-color: #FFB703;
   border-radius:25px;
   border: none;
   outline: none;
@@ -14,17 +16,14 @@ export const Button = styled.button`
   margin-right: 36px;
   margin-bottom: 24px;
   font-family: Poppins;
-  font-style: normal;
-  font-weight: normal;
   font-size: 18px;
   line-height: 27px;
   align-items: center;
   letter-spacing: 0.2px;
-  color: #373F41;
+  color: white;
   box-shadow: 4px 8px 10px 0px #00000040;
 
   &:hover{
-    background-color: #cbecf7;
     box-shadow: none;
   }
 `;
@@ -34,7 +33,72 @@ export const Kategori = styled.div`
 `;
 
 
-const Articles =()=>{
+const Articles =({id, title})=>{
+
+  const url = 'https://1eb9-117-103-68-38.ngrok.io/clinic';
+  const [search,setSearch]= useState('');
+  const [load,setLoad]= useState(true);
+
+  const fetchArticle = async () =>{
+    setLoad(true);
+
+  try {
+    const response = await Axios.get(url
+    ).then(res=>{
+      setArticle(res.data.data);
+    });
+    setLoad(false);
+  }
+  catch (error) {
+    setLoad(false);
+    console.log(error);
+  }
+  }
+
+  useEffect(()=> {fetchArticle();
+  },[]);
+
+  function handle(event) {
+    setSearch(event.target.value);
+    console.log(search);
+  }
+
+  const handleKeyDown = (e) => {
+  if (e.key === 'Enter') {
+    handlePost();
+    console.log('do validate');
+  }
+  }
+
+  const handlePost = async ()=>{
+  const values = {title: search}
+  try {
+    const response = await Axios.post(url,values
+    ).then(res=>{
+      setArticle(res.data.data);
+    });
+  }
+  catch (error) {
+    console.log(error);
+    console.log(search);
+  } console.log(values);
+
+  }
+
+  const seeMore=(id)=>{
+
+  }
+
+  const [article,setArticle] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(5);
+
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = article.slice(indexOfFirstPost, indexOfLastPost);
+
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+
   return(
     <>
       <section>
@@ -46,22 +110,28 @@ const Articles =()=>{
       </div>
       <Kategori>
         <Title>Kategori</Title>
-        <Button>Kucing</Button>
-        <Button>Anjing</Button>
-        <Button>Kelinci</Button>
-        <Button>Hamster</Button>
-        <Button>Ikan</Button>
-        <Button>Reptil</Button>
-        <Button>Perawatan</Button>
-        <Button>Kesehatan</Button>
-        <Button>Penanganan Pertama</Button>
-        <Button>Burung</Button>
+        <Button value='kucing'>Kucing</Button>
+        <Button value='anjing'>Anjing</Button>
+        <Button value='kelinci'>Kelinci</Button>
+        <Button value='hamster'>Hamster</Button>
+        <Button value='ikan'>Ikan</Button>
+        <Button value='reptil'>Reptil</Button>
+        <Button value='perawatan'>Perawatan</Button>
+        <Button value='kesehatan'>Kesehatan</Button>
+        <Button value='penanganan pertama'>Penanganan Pertama</Button>
+        <Button value='burung'>Burung</Button>
       </Kategori>
       </section>
       <section>
       <Kategori>
         <Title>Artikel Terkini</Title>
       </Kategori>
+        <ArticleCard>
+          test
+        </ArticleCard>
+        <ArticleCard>
+          test
+        </ArticleCard>
         <ArticleCard>
           test
         </ArticleCard>

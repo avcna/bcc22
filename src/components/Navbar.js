@@ -3,6 +3,7 @@ import {
 Nav,
 NavLink,
 NavMenu,
+NavMenu2,
 NavBtn,
 NavBtnLink,
 NavBrand
@@ -34,6 +35,14 @@ return (
 		{/* Second Nav */}
 		{/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}
 		</NavMenu>
+			<NavMenu2>
+		<NavLink className='nav-link nav-link2' to='/Login'>
+			Login
+		</NavLink>
+		<NavLink className='nav-link nav-link2' to='/Signup'>
+			Signup
+		</NavLink>
+		</NavMenu2>
 	</Nav>
 	</>
 );

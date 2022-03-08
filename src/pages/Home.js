@@ -12,7 +12,7 @@ import Kucing from '../images/kucing.png';
 import {Carouseli} from '../components/ArtikelElements';
 
 export const Section = styled.section`
-  background-color:#F9F9F9;
+  background-color:#FFF;
   padding: 0 0 5rem;
 `;
 
