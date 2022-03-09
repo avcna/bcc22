@@ -3,6 +3,7 @@ import { NavLink as Link } from 'react-router-dom';
 import {useNavigate} from 'react-router-dom';
 import Axios from 'axios';
 import React, { useState } from 'react';
+import {useAuth} from '../config/Auth';
 
 
 export const FormWrapper = styled.section`
@@ -75,10 +76,10 @@ export const P = styled.p`
 `;
 
 const Login = () => {
-
-    const urlpl='';
-    const urlgl='';
+    const { setAndGetTokens } = useAuth();
     const navigate = useNavigate();
+    const urlpl='https://e68e-103-108-21-95.ngrok.io/user/login';
+    const urlgl='https://e68e-103-108-21-95.ngrok.io/user ';
   	const [forms, setForms] = useState({ email :"", password :"" });
   	const [isError, setIsError] = useState({ status: false, message: '' });
   	const handleLogin = async (e) => {
@@ -97,6 +98,7 @@ const Login = () => {
   					},
   				});
   				const id = currentUser.data.data.id;
+          setAndGetTokens(token,id);
   				navigate('/', {replace:true});
   			}
 
