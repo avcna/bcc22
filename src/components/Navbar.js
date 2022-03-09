@@ -2,6 +2,7 @@ import React from 'react';
 import {
 Nav,
 NavLink,
+NavLink2,
 NavMenu,
 NavMenu2,
 NavBtn,
@@ -12,6 +13,18 @@ import styled from 'styled-components';
 
 export const Navbrand = styled(NavBrand)`
 	margin-left: 124px;
+`;
+
+export const Btn = styled.button`
+	border-radius:25px;
+	color:#023047;
+	background-color:#FFB703;
+	border: none;
+	font-family:Poppins;
+
+	&:hover{
+		color:white;
+	}
 `;
 
 const Navbar = () => {
@@ -39,9 +52,9 @@ return (
 		<NavLink className='nav-link nav-link2' to='/Login'>
 			Login
 		</NavLink>
-		<NavLink className='nav-link nav-link2' to='/Signup'>
+		<Btn><NavLink2 to='/Signup'>
 			Signup
-		</NavLink>
+		</NavLink2></Btn>
 		</NavMenu2>
 	</Nav>
 	</>

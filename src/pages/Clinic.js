@@ -1,4 +1,10 @@
-import {Card, DivSearch,Img,SearchInput, Klinik} from '../components/ClinicElement';
+import {Card,
+  DivSearch,
+  Img,
+  SearchInput,
+  Klinik,
+  ClinicName}
+  from '../components/ClinicElement';
 import {Section,Title} from '../components/Basic';
 import styled from 'styled-components';
 import Footer from '../components/Footer';
@@ -8,9 +14,17 @@ import Pagination from '../components/pagination';
 import Axios from 'axios';
 import Loading from '../components/loading';
 import '../App.css';
+import Phone from '../images/phone.png';
+import Map from '../images/map.png';
+import Navbar from '../components/Navbar';
 
 export const Title2 = styled(Title)`
   padding: 81px 165px 30px;
+`;
+
+export const Title3 = styled(Title)`
+  padding: 81px 165px 30px;
+  color:red;
 `;
 
 export const A = styled.a`
@@ -27,7 +41,11 @@ export const Paging = styled(Pagination)`
   padding: 81px 165px 30px;
   text-align: center;
   color: red;
+`;
 
+export const Icon = styled.img`
+   margin-right: 21px;
+   height: 17px;
 `;
 
 export const PaginationWrapper = styled.div`=
@@ -41,6 +59,7 @@ const Clinic = ({id,name, phone_number, address, link_google_maps})=>{
     const url = 'https://4304-118-99-79-63.ngrok.io/clinic';
     const [search,setSearch]= useState('');
     const [load,setLoad]= useState(true);
+    const [isEmpty, setEmpty]= useState(false);
 
     const fetchClinic = async () =>{
       setLoad(true);
@@ -63,14 +82,11 @@ const Clinic = ({id,name, phone_number, address, link_google_maps})=>{
 
     function handle(event) {
       setSearch(event.target.value);
-      console.log(search);
     }
 
     const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
       handlePost();
-      console.log('do validate');
-
     }
   }
 
@@ -84,8 +100,7 @@ const Clinic = ({id,name, phone_number, address, link_google_maps})=>{
     }
     catch (error) {
       console.log(error);
-      console.log(search);
-    } console.log(values);
+    }
 
   }
 
@@ -103,6 +118,9 @@ const Clinic = ({id,name, phone_number, address, link_google_maps})=>{
     return(
 
     <div>
+    <div className='nav-div'>
+    <Navbar />
+    </div>
     <section>
     <div style={{display: 'flex', justifyContent: 'center'}}>
     <DivSearch style={{display: 'flex', justifyContent: 'center'}}>
@@ -117,23 +135,17 @@ const Clinic = ({id,name, phone_number, address, link_google_maps})=>{
     </section>
     <section>
     <Title2>Daftar Klinik Hewan</Title2>
-
     {load && (<Loading></Loading>)}
-
     {currentPosts.map((currentPosts)=>{
     const {id, name, phone_number, address, link_google_maps} = currentPosts;
-    if (currentPosts.length==0){
-      return(
-        <p>Data tidak dapat ditemukan</p>
-      )
-    }
-    else{
     return <Card key={currentPosts.id} {...currentPosts}>
-    <h5>{name}</h5>
+    <ClinicName>{name}</ClinicName>
+    <Icon src={Phone}/>
     {phone_number} <br/>
-    {address}
+    <Icon src={Map}/>
+    {address}<br/>
     <A target="_blank" href={link_google_maps}> Lihat di map</A>
-    </Card>}
+    </Card>
   })}
 
     <PaginationWrapper>

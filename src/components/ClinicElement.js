@@ -9,6 +9,7 @@ export const Card = styled.section`
   color:white;
   margin: 0 165px 30px;
   font-family: Poppins;
+  border-radius:30px;
 `;
 
 export const DivSearch = styled.div`
@@ -36,6 +37,16 @@ export const Img = styled.img`
   height: 25px;
   position: relative;
   top: 3px;
+`;
+
+export const ClinicName = styled.h5`
+  color:#FFB703;
+  font-family: Poppins;
+`;
+
+export const Warn = styled.p`
+  color:red;
+  font-family: Poppins;
 `;
 
 export const Searching = ({id, name, search})=>{

@@ -6,6 +6,8 @@ import {ArticleCard} from '../components/ArtikelElements';
 import styled from 'styled-components';
 import {useEffect, useState} from "react";
 import Axios from 'axios';
+import Navbar from '../components/Navbar';
+import '../App.css';
 
 export const Button = styled.button`
   background-color: #FFB703;
@@ -20,7 +22,7 @@ export const Button = styled.button`
   line-height: 27px;
   align-items: center;
   letter-spacing: 0.2px;
-  color: white;
+  color: #023047;
   box-shadow: 4px 8px 10px 0px #00000040;
 
   &:hover{
@@ -30,6 +32,28 @@ export const Button = styled.button`
 
 export const Kategori = styled.div`
   padding: 3.875rem 133px 0;
+`;
+
+export const ArticleTitle = styled.p`
+  font-family: Poppins;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 27px;
+  letter-spacing: 0.20000000298023224px;
+  text-align: center;
+  color:#FFB703;
+`;
+
+export const Content = styled.p`
+font-family: Poppins;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: 24px;
+letter-spacing: 0.20000000298023224px;
+text-align: left;
+color: white;
 `;
 
 
@@ -101,6 +125,9 @@ const Articles =({id, title})=>{
 
   return(
     <>
+    <div className='nav-div'>
+    <Navbar />
+    </div>
       <section>
       <div style={{display: 'flex', justifyContent: 'center'}}>
       <DivSearch style={{display: 'flex', justifyContent: 'center'}}>
@@ -127,7 +154,9 @@ const Articles =({id, title})=>{
         <Title>Artikel Terkini</Title>
       </Kategori>
         <ArticleCard>
-          test
+          <ArticleTitle>test</ArticleTitle>
+          <Content>Menjaga kebersihan dan kesehatan pada kucing peliharaan di rumah, adalah hal wajib yang perlu kamu perhatikan, Bela. Meski hanya di rumah, risiko kucing terkena penyakit dan jamur masih ada. Jamuran pada kucing akan menyebabkan bulu rontok dan kulit bersisik ...
+          </Content>
         </ArticleCard>
         <ArticleCard>
           test

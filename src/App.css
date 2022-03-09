@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Mulish&family=Poppins:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@400;700&family=Poppins:wght@400;600&display=swap');
 
 
 h1{
@@ -167,4 +167,8 @@ b{
 
 .carousel-control-next{
   margin-right: 8rem;
+}
+
+.MuiTabs-indicator.css-1aquho2-MuiTabs-indicator{
+  background-color: ##023047;
 }

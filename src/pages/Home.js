@@ -10,6 +10,7 @@ import Foto2 from '../images/foto2.png';
 import Foto3 from '../images/foto3.png';
 import Kucing from '../images/kucing.png';
 import {Carouseli} from '../components/ArtikelElements';
+import Navbar from '../components/Navbar';
 
 export const Section = styled.section`
   background-color:#FFF;
@@ -19,6 +20,9 @@ export const Section = styled.section`
 const Home =() =>{
   return(
     <>
+    <div className='nav-div'>
+    <Navbar />
+    </div>
     <section>
         <img className='jarak-foto'src={Image}/>
         <div className='tentangKami'>
