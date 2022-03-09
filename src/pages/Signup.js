@@ -11,12 +11,14 @@ import { NavLink as Link } from 'react-router-dom';
 import {useNavigate} from 'react-router-dom';
 import Axios from 'axios';
 import React, { useState } from 'react';
+import {useAuth} from '../config/Auth';
 
 
 const Signup = () => {
   const urlps='';
   const urlpl='';
   const urlgl='';
+  const { setAndGetTokens } = useAuth();
 	const navigate = useNavigate();
 	const [forms, setForms] = useState({ name:'', email :'', password:'', username :'', });
 	const [isError, setIsError] = useState({ status: false, message: '' });
