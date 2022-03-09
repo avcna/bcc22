@@ -79,8 +79,8 @@ const Login = () => {
     const { setAndGetTokens } = useAuth();
     const navigate = useNavigate();
     const urlpl='https://e68e-103-108-21-95.ngrok.io/user/login';
-    const urlgl='https://e68e-103-108-21-95.ngrok.io/user ';
-  	const [forms, setForms] = useState({ email :"", password :"" });
+    const urlgl='https://e68e-103-108-21-95.ngrok.io/user';
+  	const [forms, setForms] = useState({ email :'', password :'' });
   	const [isError, setIsError] = useState({ status: false, message: '' });
   	const handleLogin = async (e) => {
   		e.preventDefault();
@@ -89,6 +89,7 @@ const Login = () => {
   			const loginResponse = await Axios.post(urlpl,{
   			...forms,
   			});
+        console.log(loginResponse);
 
   			if (loginResponse.data.success) {
   				const token = loginResponse.data.data.token;

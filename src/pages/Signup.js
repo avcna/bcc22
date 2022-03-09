@@ -17,7 +17,7 @@ import {useAuth} from '../config/Auth';
 const Signup = () => {
   const urlps='https://e68e-103-108-21-95.ngrok.io/user/register';
   const urlpl='https://e68e-103-108-21-95.ngrok.io/user/login';
-  const urlgl='https://e68e-103-108-21-95.ngrok.io/user ';
+  const urlgl='https://e68e-103-108-21-95.ngrok.io/user';
   const { setAndGetTokens } = useAuth();
 	const navigate = useNavigate();
 	const [forms, setForms] = useState({ name:'', email :'', password:'', username :'', });
