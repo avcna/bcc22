@@ -18,6 +18,7 @@ export const Input = styled.input`
   width: 814px;
   margin-bottom: 14px;
   margin-top:0;
+  padding: 10px 24px;
 `;
 
 export const DocterCard = styled.div`
@@ -49,6 +50,6 @@ export const Label = styled.label`
   line-height: 40px;
   letter-spacing: 0.10000000149011612px;
   text-align: center;
-  margin-bottom: 14px;
-  margin-left: 36px;
+  margin-bottom: 5px;
+  margin-left: 24px;
 `;
