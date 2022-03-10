@@ -2,6 +2,10 @@ import styled from 'styled-components';
 import 'bootstrap/dist/css/bootstrap.css';
 import {Row,Col,Container} from 'react-bootstrap';
 import Logo from '../images/logofixx.png';
+import Wa from '../images/WAicon.png';
+import Ig from '../images/IGicon.png';
+import Fb from '../images/FBicon.png';
+import Twt from '../images/TWTicon.png';
 
 export const Footer_sec = styled.section`
   background-color: #023047;
@@ -49,18 +53,22 @@ const Footer=()=>{
         <h4>Contact Person</h4>
         <Row>
           <Col>
-            WA
+            <img src={Wa}/>
+            0812-3456-7890
           </Col>
           <Col>
-            FB
+            <img src={Fb}/>
+            PetLink
           </Col>
         </Row>
         <Row>
           <Col>
-            IG
+            <img src={Ig}/>
+            petlink_123
           </Col>
           <Col>
-            TWT
+            <img src={Twt}/>
+            PetLink123
           </Col>
         </Row>
       </Col>

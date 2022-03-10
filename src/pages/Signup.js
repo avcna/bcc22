@@ -5,13 +5,16 @@ import {FormWrapper,
   Input,
   Subtn,
   Title,
-  P
+  P,
+  Img
 } from './Login';
 import { NavLink as Link } from 'react-router-dom';
 import {useNavigate} from 'react-router-dom';
 import Axios from 'axios';
 import React, { useState } from 'react';
 import {useAuth} from '../config/Auth';
+import Footer from '../components/Footer';
+import Logo from '../images/petlink.png';
 
 
 const Signup = () => {
@@ -68,6 +71,7 @@ const Signup = () => {
 
   return(
     <>
+    <center><Img width='280px' className="img-login" src={Logo} alt="logo" /></center>
     <Wrapper>
     <FormWrapper>
       <form onSubmit={handleSignup}>
@@ -101,6 +105,7 @@ const Signup = () => {
       <P>Sudah mempunyai akun?<Link to='/Login'>Login</Link></P>
     </FormWrapper>
     </Wrapper>
+    <Footer/>
     </>
   )
 }

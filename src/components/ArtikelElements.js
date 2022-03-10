@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import ArtCard from './ArtikelElement';
 import '../App.css';
 import Carousel from 'react-bootstrap/Carousel';
 

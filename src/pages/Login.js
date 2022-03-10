@@ -4,10 +4,12 @@ import {useNavigate} from 'react-router-dom';
 import Axios from 'axios';
 import React, { useState } from 'react';
 import {useAuth} from '../config/Auth';
+import Logo from '../images/petlink.png';
+import Footer from '../components/Footer';
 
 
 export const FormWrapper = styled.section`
-  width: 866px;
+  width: 806px;
   border-style: solid;
   border-width:5px;
   border-radius: 50px;
@@ -17,8 +19,13 @@ export const FormWrapper = styled.section`
 `;
 
 export const Wrapper = styled.section`
-  display: flex;
+  display:flex;
   justify-content: center;
+  margin-bottom: 136px;
+`;
+
+export const Img = styled.img`
+  margin: 30px 0 25px;
 `;
 
 export const Label = styled.label`
@@ -37,7 +44,7 @@ export const Label = styled.label`
 export const Input = styled.input`
   border-radius: 50px;
   font-family: Mulish;
-  width:690px;
+  width:630px;
   border-color:#023047;
   padding: 10px 30px;
   border-width:2px;
@@ -55,7 +62,7 @@ export const Subtn = styled.button`
   line-height: 40px;
   letter-spacing: 0.10000000149011612px;
   text-align: center;
-  width: 459px;
+  width: 399px;
   border-style:none;
   margin-top:32px;
 `;
@@ -113,6 +120,7 @@ const Login = () => {
 
   return(
     <>
+    <center><Img width='280px' className="img-login" src={Logo} alt="logo" /></center>
     <Wrapper>
     <FormWrapper>
     <Title>Login</Title>
@@ -134,6 +142,7 @@ const Login = () => {
       <P>Belum mempunyai akun?<Link to='/Signup'>Signup</Link></P>
     </FormWrapper>
     </Wrapper>
+    <Footer/>
     </>
   )
 }

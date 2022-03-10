@@ -4,6 +4,7 @@ import { BrowserRouter,Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Klinik from './pages/Clinic';
 import Articles from './pages/Articles';
+import Konsultasi from './pages/Konsultasi';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import {useEffect, useState} from "react";
@@ -31,7 +32,7 @@ return (
 		<Route path='/Artikel' element={<Articles/>} />
 		<Route path='/Login' element={<Login/>} />
 		<Route path='/Signup' element={<Signup/>} />
-		{/*<Route path='/Konsultasi' element={<Konsultasi/>} />*/}
+		<Route path='/Konsultasi' element={<Konsultasi/>} />
 	</Routes>
 	</BrowserRouter>
 	</AuthContext.Provider>
