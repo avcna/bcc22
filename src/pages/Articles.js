@@ -8,6 +8,9 @@ import {useEffect, useState} from "react";
 import Axios from 'axios';
 import Navbar from '../components/Navbar';
 import '../App.css';
+import Pagination from '../components/pagination';
+import {PaginationWrapper} from './Clinic';
+import {Paging} from './Clinic';
 
 export const Button = styled.button`
   background-color: #FFB703;
@@ -57,9 +60,10 @@ color: white;
 `;
 
 
-const Articles =({id, title})=>{
 
-  const url = 'https://1eb9-117-103-68-38.ngrok.io/clinic';
+const Articles =({id, title, content, image, category})=>{
+
+  const url = 'https://1990-103-108-21-98.ngrok.io/article/search';
   const [search,setSearch]= useState('');
   const [load,setLoad]= useState(true);
 
@@ -104,13 +108,7 @@ const Articles =({id, title})=>{
   }
   catch (error) {
     console.log(error);
-    console.log(search);
-  } console.log(values);
-
   }
-
-  const seeMore=(id)=>{
-
   }
 
   const [article,setArticle] = useState([]);
@@ -153,20 +151,28 @@ const Articles =({id, title})=>{
       <Kategori>
         <Title>Artikel Terkini</Title>
       </Kategori>
-        <ArticleCard>
-          <ArticleTitle>test</ArticleTitle>
-          <Content>Menjaga kebersihan dan kesehatan pada kucing peliharaan di rumah, adalah hal wajib yang perlu kamu perhatikan, Bela. Meski hanya di rumah, risiko kucing terkena penyakit dan jamur masih ada. Jamuran pada kucing akan menyebabkan bulu rontok dan kulit bersisik ...
+        {currentPosts.map((currentPosts)=>{
+        const {id, title, content, image, category} = currentPosts;
+        return <ArticleCard key={currentPosts.id} {...currentPosts}>
+        <Content>{category}</Content>
+        <img src={image}/>
+          <ArticleTitle>{title}</ArticleTitle>
+          <Content>{content.substring(0,400)}...
           </Content>
         </ArticleCard>
-        <ArticleCard>
-          test
-        </ArticleCard>
-        <ArticleCard>
-          test
-        </ArticleCard>
-      <Footer/>
-      </section>
+      })}
 
+      <PaginationWrapper>
+            <Paging
+              postsPerPage={postsPerPage}
+              totalPosts={article.length}
+              paginate={paginate}
+            />
+          </PaginationWrapper>
+
+      <Footer/>
+
+      </section>
     </>
   )
 }

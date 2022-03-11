@@ -19,8 +19,16 @@ export const Par = styled.p`
   color: white;
 `;
 
+export const Col2 = styled(Col)`
+  margin-bottom: 17px;
+`;
+
 export const Img = styled.img`
   text-align: center;
+`;
+
+export const Icon = styled.img`
+  margin-right: 10px;
 `;
 
 export const Footer_down = styled.section`
@@ -32,7 +40,11 @@ text-align: center;
 letter-spacing: 0.2px;
 color: #FFF;
 background-color: #023047;
+`;
 
+export const H4 = styled.h4`
+  color: white;
+  margin-bottom: 2rem;
 `;
 
 const Footer=()=>{
@@ -40,38 +52,38 @@ const Footer=()=>{
     <>
     <Footer_sec>
     <Row>
-      <Col className='col-2'>
+      <Col2 className='col-2'>
         <Img src={Logo} width='150px'/>
-      </Col>
-      <Col className='col-6'>
-      <h4>Tentang Kami</h4>
+      </Col2>
+      <Col2 className='col-6'>
+      <H4>Tentang Kami</H4>
       <Par>Lorem Lorem Ipsum is simply dummy text of the printing and typesetting industry.
       Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an
       unknown printer took a galley of type and scrambled it to make a type specimen book. </Par>
-      </Col>
-      <Col className='col-4'>
-        <h4>Contact Person</h4>
+      </Col2>
+      <Col2 className='col-4'>
+        <H4>Contact Person</H4>
         <Row>
-          <Col>
-            <img src={Wa}/>
+          <Col2>
+            <Icon src={Wa}/>
             0812-3456-7890
-          </Col>
-          <Col>
-            <img src={Fb}/>
+          </Col2>
+          <Col2>
+            <Icon src={Fb}/>
             PetLink
-          </Col>
+          </Col2>
         </Row>
         <Row>
-          <Col>
-            <img src={Ig}/>
+          <Col2>
+            <Icon src={Ig}/>
             petlink_123
-          </Col>
-          <Col>
-            <img src={Twt}/>
+          </Col2>
+          <Col2>
+            <Icon src={Twt}/>
             PetLink123
-          </Col>
+          </Col2>
         </Row>
-      </Col>
+      </Col2>
     </Row>
     </Footer_sec>
     <Footer_down>

@@ -1,12 +1,11 @@
 import styled from 'styled-components';
 import { NavLink as Link } from 'react-router-dom';
 import {useNavigate} from 'react-router-dom';
-import Axios from 'axios';
 import React, { useState } from 'react';
 import {useAuth} from '../config/Auth';
 import Logo from '../images/petlink.png';
 import Footer from '../components/Footer';
-
+import Axios from 'axios';
 
 export const FormWrapper = styled.section`
   width: 806px;
@@ -85,8 +84,8 @@ export const P = styled.p`
 const Login = () => {
     const { setAndGetTokens } = useAuth();
     const navigate = useNavigate();
-    const urlpl='https://e68e-103-108-21-95.ngrok.io/user/login';
-    const urlgl='https://e68e-103-108-21-95.ngrok.io/user';
+    const urlpl='https://836f-103-108-23-20.ngrok.io/user/login';
+    const urlgl='https://836f-103-108-23-20.ngrok.io/user';
   	const [forms, setForms] = useState({ email :'', password :'' });
   	const [isError, setIsError] = useState({ status: false, message: '' });
   	const handleLogin = async (e) => {
@@ -104,7 +103,7 @@ const Login = () => {
   					headers: {
   						Authorization : `Bearer ${token}`
   					},
-  				});
+  				})
   				const id = currentUser.data.data.id;
           setAndGetTokens(token,id);
   				navigate('/', {replace:true});
@@ -115,12 +114,13 @@ const Login = () => {
   				status : true,
   				message : 'error while try to log in',
   			}));
+        console.log(error);
   		}
   	};
 
   return(
     <>
-    <center><Img width='280px' className="img-login" src={Logo} alt="logo" /></center>
+    <center><Link to='/'><Img width='280px' className="img-login" src={Logo} alt="logo" /></Link></center>
     <Wrapper>
     <FormWrapper>
     <Title>Login</Title>

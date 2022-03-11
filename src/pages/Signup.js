@@ -10,17 +10,17 @@ import {FormWrapper,
 } from './Login';
 import { NavLink as Link } from 'react-router-dom';
 import {useNavigate} from 'react-router-dom';
-import Axios from 'axios';
 import React, { useState } from 'react';
 import {useAuth} from '../config/Auth';
 import Footer from '../components/Footer';
 import Logo from '../images/petlink.png';
+import Axios from 'axios';
 
 
 const Signup = () => {
-  const urlps='https://e68e-103-108-21-95.ngrok.io/user/register';
-  const urlpl='https://e68e-103-108-21-95.ngrok.io/user/login';
-  const urlgl='https://e68e-103-108-21-95.ngrok.io/user';
+  const urlps='https://836f-103-108-23-20.ngrok.io/register';
+  const urlpl='https://836f-103-108-23-20.ngrok.io/user/login';
+  const urlgl='https://836f-103-108-23-20.ngrok.io/user';
   const { setAndGetTokens } = useAuth();
 	const navigate = useNavigate();
 	const [forms, setForms] = useState({ name:'', email :'', password:'', username :'', });
@@ -40,6 +40,7 @@ const Signup = () => {
 					const loginResponse = await Axios.post(urlpl,{
 					...forms,
 					});
+          console.log(loginResponse);
 
 					if (loginResponse.data.success) {
 						const token = loginResponse.data.data.token;
@@ -47,7 +48,7 @@ const Signup = () => {
 							headers: {
 								Authorization : `Bearer ${token}`
 							},
-						});
+						})
 						const id = currentUser.data.data.id;
             setAndGetTokens(token,id);
 						navigate('/', {replace:true});
@@ -71,7 +72,7 @@ const Signup = () => {
 
   return(
     <>
-    <center><Img width='280px' className="img-login" src={Logo} alt="logo" /></center>
+    <center><Link to ='/'><Img width='280px' className="img-login" src={Logo} alt="logo" /></Link></center>
     <Wrapper>
     <FormWrapper>
       <form onSubmit={handleSignup}>

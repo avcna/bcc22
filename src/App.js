@@ -4,7 +4,7 @@ import { BrowserRouter,Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Klinik from './pages/Clinic';
 import Articles from './pages/Articles';
-import Konsultasi from './pages/Konsul';
+import Konsultasi from './pages/Konsultasi';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import {useEffect, useState} from "react";

@@ -48,16 +48,3 @@ export const Warn = styled.p`
   color:red;
   font-family: Poppins;
 `;
-
-export const Searching = ({id, name, search})=>{
-
-  return(
-    <div style={{display: 'flex', justifyContent: 'center'}}>
-    <DivSearch style={{display: 'flex', justifyContent: 'center'}}>
-      <Img src={searchIcon}/>
-      <SearchInput type='text' placeholder='Cari Lokasi' onChange={(e)=>search(e.target.value)}
-      />
-    </DivSearch>
-    </div>
-  )
-};
