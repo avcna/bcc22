@@ -56,7 +56,8 @@ export const PaginationWrapper = styled.div`=
 
 const Clinic = ({id,name, phone_number, address, link_google_maps})=>{
 
-    const url = 'https://efde-103-108-23-20.ngrok.io/clinic';
+    const url = 'https://6017-103-108-21-76.ngrok.io/clinic';
+    const urlp = 'https://6017-103-108-21-76.ngrok.io/clinic/search';
     const [search,setSearch]= useState('');
     const [load,setLoad]= useState(true);
     const [isEmpty, setEmpty]= useState(false);
@@ -93,7 +94,7 @@ const Clinic = ({id,name, phone_number, address, link_google_maps})=>{
   const handlePost = async ()=>{
     const values = {location: search}
     try {
-      const response = await Axios.post(url,values
+      const response = await Axios.post(urlp,values
       ).then(res=>{
         setClinic(res.data.data);
       });

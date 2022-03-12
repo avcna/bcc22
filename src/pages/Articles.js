@@ -1,8 +1,8 @@
-import {DivSearch,Img,SearchInput, Klinik} from '../components/ClinicElement';
+import {DivSearch,Img,SearchInput} from '../components/ClinicElement';
 import searchIcon from '../images/magnifying-glass.png';
 import Footer from '../components/Footer';
-import {Section, Title} from '../components/Basic';
-import {ArticleCard} from '../components/ArtikelElements';
+import {Title} from '../components/Basic';
+import {Style1} from '../components/ArtikelElements';
 import styled from 'styled-components';
 import {useEffect, useState} from "react";
 import Axios from 'axios';
@@ -11,6 +11,7 @@ import '../App.css';
 import Pagination from '../components/pagination';
 import {PaginationWrapper} from './Clinic';
 import {Paging} from './Clinic';
+import Loading from '../components/loading';
 
 export const Button = styled.button`
   background-color: #FFB703;
@@ -39,7 +40,7 @@ export const Kategori = styled.div`
 
 export const ArticleTitle = styled.p`
   font-family: Poppins;
-  font-size: 18px;
+  font-size: 20px;
   font-style: normal;
   font-weight: 600;
   line-height: 27px;
@@ -48,22 +49,11 @@ export const ArticleTitle = styled.p`
   color:#FFB703;
 `;
 
-export const Content = styled.p`
-font-family: Poppins;
-font-size: 16px;
-font-style: normal;
-font-weight: 400;
-line-height: 24px;
-letter-spacing: 0.20000000298023224px;
-text-align: left;
-color: white;
-`;
 
+const Articles =({style1})=>{
 
-
-const Articles =({id, title, content, image, category})=>{
-
-  const url = 'https://1990-103-108-21-98.ngrok.io/article/search';
+  const urlpost = 'https://6017-103-108-21-76.ngrok.io/article/category';
+  const urlget = 'https://6017-103-108-21-76.ngrok.io/article';
   const [search,setSearch]= useState('');
   const [load,setLoad]= useState(true);
 
@@ -71,7 +61,7 @@ const Articles =({id, title, content, image, category})=>{
     setLoad(true);
 
   try {
-    const response = await Axios.get(url
+    const response = await Axios.get(urlget
     ).then(res=>{
       setArticle(res.data.data);
     });
@@ -99,9 +89,9 @@ const Articles =({id, title, content, image, category})=>{
   }
 
   const handlePost = async ()=>{
-  const values = {title: search}
+  const values = {category: search}
   try {
-    const response = await Axios.post(url,values
+    const response = await Axios.post(urlpost,values
     ).then(res=>{
       setArticle(res.data.data);
     });
@@ -109,6 +99,21 @@ const Articles =({id, title, content, image, category})=>{
   catch (error) {
     console.log(error);
   }
+  }
+
+  const clicked = async (data)=>{
+    const now = data;
+    const values = {category: now}
+    try {
+      const response = await Axios.post(urlpost,values
+      ).then(res=>{
+        setArticle(res.data.data);
+      });
+    }
+    catch (error) {
+      console.log(error);
+    }
+
   }
 
   const [article,setArticle] = useState([]);
@@ -121,6 +126,7 @@ const Articles =({id, title, content, image, category})=>{
 
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
+
   return(
     <>
     <div className='nav-div'>
@@ -130,45 +136,46 @@ const Articles =({id, title, content, image, category})=>{
       <div style={{display: 'flex', justifyContent: 'center'}}>
       <DivSearch style={{display: 'flex', justifyContent: 'center'}}>
         <Img src={searchIcon}/>
-        <SearchInput type='text' placeholder='Cari Artikel'/>
+        <SearchInput type='text' placeholder='Cari Artikel' onKeyDown={handleKeyDown} onChange={(event)=>{
+          handle(event)
+          }
+        }
+        />
       </DivSearch>
       </div>
       <Kategori>
         <Title>Kategori</Title>
-        <Button value='kucing'>Kucing</Button>
-        <Button value='anjing'>Anjing</Button>
-        <Button value='kelinci'>Kelinci</Button>
-        <Button value='hamster'>Hamster</Button>
-        <Button value='ikan'>Ikan</Button>
-        <Button value='reptil'>Reptil</Button>
-        <Button value='perawatan'>Perawatan</Button>
-        <Button value='kesehatan'>Kesehatan</Button>
-        <Button value='penanganan pertama'>Penanganan Pertama</Button>
-        <Button value='burung'>Burung</Button>
+        <Button onClick={(value)=>{clicked('kucing')}}>Kucing</Button>
+        <Button onClick={(value)=>{clicked('anjing')}}>Anjing</Button>
+        <Button onClick={(value)=>{clicked('kelinci')}}>Kelinci</Button>
+        <Button onClick={(value)=>{clicked('hamster')}}>Hamster</Button>
+        <Button onClick={(value)=>{clicked('ikan')}}>Ikan</Button>
+        <Button onClick={(value)=>{clicked('reptil')}}>Reptil</Button>
+        <Button onClick={(value)=>{clicked('perawatan')}}>Perawatan</Button>
+        <Button onClick={(value)=>{clicked('kesehatan')}}>Kesehatan</Button>
+        <Button onClick={(value)=>{clicked('penanganan pertama')}}>Penanganan Pertama</Button>
+        <Button onClick={(value)=>{clicked('burung')}}>Burung</Button>
       </Kategori>
       </section>
       <section>
       <Kategori>
         <Title>Artikel Terkini</Title>
       </Kategori>
-        {currentPosts.map((currentPosts)=>{
+      {load && (<Loading></Loading>)}
+        {
+          currentPosts.map((currentPosts)=>{
         const {id, title, content, image, category} = currentPosts;
-        return <ArticleCard key={currentPosts.id} {...currentPosts}>
-        <Content>{category}</Content>
-        <img src={image}/>
-          <ArticleTitle>{title}</ArticleTitle>
-          <Content>{content.substring(0,400)}...
-          </Content>
-        </ArticleCard>
+        return <Style1 key={currentPosts.id} {...currentPosts}>
+        </Style1>
       })}
 
       <PaginationWrapper>
-            <Paging
-              postsPerPage={postsPerPage}
-              totalPosts={article.length}
-              paginate={paginate}
-            />
-          </PaginationWrapper>
+        <Paging
+          postsPerPage={postsPerPage}
+          totalPosts={article.length}
+          paginate={paginate}
+        />
+      </PaginationWrapper>
 
       <Footer/>
 

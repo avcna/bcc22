@@ -13,6 +13,7 @@ export const Footer_sec = styled.section`
   font-size : 16px;
   color: white;
   font-family: Poppins;
+  margin-top: 7rem;
 `;
 
 export const Par = styled.p`

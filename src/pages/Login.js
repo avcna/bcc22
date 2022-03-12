@@ -84,8 +84,8 @@ export const P = styled.p`
 const Login = () => {
     const { setAndGetTokens } = useAuth();
     const navigate = useNavigate();
-    const urlpl='https://836f-103-108-23-20.ngrok.io/user/login';
-    const urlgl='https://836f-103-108-23-20.ngrok.io/user';
+    const urlpl='https://1990-103-108-21-98.ngrok.io/user/login';
+    const urlgl='https://1990-103-108-21-98.ngrok.io/user';
   	const [forms, setForms] = useState({ email :'', password :'' });
   	const [isError, setIsError] = useState({ status: false, message: '' });
   	const handleLogin = async (e) => {

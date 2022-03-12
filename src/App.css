@@ -181,17 +181,19 @@ b{
 /* --------------------------------konsultasi-------------------------------- */
 .ant-steps{
   text-align: center;
-  width:750px;
-  margin: 100px auto 20px;
+  width:820px;
+  margin: 100px auto -15px;
   font-display:
 }
 
 .steps-action {
   margin-top: 24px;
+  display: flex;
+  justify-content: center;
 }
 [data-theme="dark"] .steps-content {
   margin-top: 16px;
-  border: 1px dashed #303030;
+  border: none;
   background-color: rgba(255,255,255,0.04);
   color: rgba(255,255,255,0.65);
   padding-top: 80px;
@@ -226,6 +228,7 @@ b{
   font-size: 0px;
 }
 
-.ant-btn {
-  background: red;
+
+.antd-table-tbody{
+  height: 50%;
 }

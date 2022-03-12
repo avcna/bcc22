@@ -9,6 +9,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import {useEffect, useState} from "react";
 import {AuthContext} from './config/Auth';
+import {PrivateRoute, RestrictedRoute} from './config/PrivateRoute';
 
 function App() {
 	const isAnyToken = JSON.parse(localStorage.getItem('token'));
@@ -30,9 +31,9 @@ return (
     <Route path='/Home' element={<Home/>} />
 		<Route path='/Klinik' element={<Klinik/>} />
 		<Route path='/Artikel' element={<Articles/>} />
-		<Route path='/Login' element={<Login/>} />
-		<Route path='/Signup' element={<Signup/>} />
-		<Route path='/Konsultasi' element={<Konsultasi/>} />
+		<Route path='/Login' element={<RestrictedRoute><Login/></RestrictedRoute>} />
+		<Route path='/Signup' element={<RestrictedRoute><Signup/></RestrictedRoute>} />
+		<Route path='/Konsultasi' element={<PrivateRoute><Konsultasi/></PrivateRoute>} />
 	</Routes>
 	</BrowserRouter>
 	</AuthContext.Provider>

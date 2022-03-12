@@ -2,14 +2,10 @@ import { Steps, Button, message } from 'antd';
 import React from 'react';
 import ReactDOM from 'react-router-dom';
 import '../App.css';
-import {Input,
-        Wrapper,
-        Biodata,
-        DocterCard,
-        Subtn,
-        Label} from '../components/konsultasiElement';
 import Navbar from '../components/Navbar';
-import {Dokter} from '../components/konsultasiCard';
+import {BioHewan, Dokter, Pembayaran, Konfirmasi} from '../components/konsultasiCard';
+import Cal from '../components/konsultasiCalendar';
+import Footer from '../components/Footer';
 
 const { Step } = Steps;
 
@@ -17,22 +13,7 @@ const steps = [
   {
     title: 'Konsultasi sekarang',
     content: (
-      <Wrapper>
-      <Biodata>
-        <form>
-          <Label>Jenis Hewan</Label><br/>
-          <Input placeholder='Masukkan nama'/><br/>
-          <Label>Nama Hewan</Label><br/>
-          <Input placeholder='Masukkan nama'/><br/>
-          <Label>Usia</Label><br/>
-          <Input placeholder='Masukkan nama'/><br/>
-          <Label>Jenis Kelamin</Label><br/>
-          <Input placeholder='Masukkan nama'/><br/>
-          <Label>Warna Hewan</Label><br/>
-          <Input placeholder='Masukkan nama'/><br/>
-        </form>
-      </Biodata>
-    </Wrapper>
+      <BioHewan/>
   ),
   },
   {
@@ -43,11 +24,17 @@ const steps = [
   },
   {
     title: 'Tentukan Jadwal',
-    content: 'Last-content',
+    content: (
+      <Cal/>
+    ),
   },
   {
     title: 'Pembayaran',
-    content: <Input/>,
+    content: <Pembayaran/>,
+  },
+  {
+    title: 'Konfirmasi',
+    content: <Konfirmasi/>,
   },
 ];
 
@@ -74,22 +61,23 @@ export const Konsultasi = () => {
       </Steps>
       <div className="steps-content">{steps[current].content}</div>
       <div className="steps-action">
+      {current > 0 && (
+        <Button style={{ margin: '0 8px', background: "#FFF", borderColor: "#FFB703", fontFamily:"Poppins", color: "#FFB703" }} onClick={() => prev()}>
+          Kembali
+        </Button>
+      )}
         {current < steps.length - 1 && (
-          <Button  onClick={() => next()}>
-            Next
+          <Button type='primary' style={{ background: "#FFB703", border: "none", fontFamily:"Poppins" }} onClick={() => next()}>
+            Selanjutnya
           </Button>
         )}
         {current === steps.length - 1 && (
-          <Button type="primary" onClick={() => message.success('Processing complete!')}>
-            Done
-          </Button>
-        )}
-        {current > 0 && (
-          <Button style={{ margin: '0 8px' }} onClick={() => prev()}>
-            Previous
+          <Button type='primary' style={{ background: "#FFB703", border: "none", fontFamily:"Poppins" }} onClick={() => message.success('Processing complete!')}>
+            Selesai
           </Button>
         )}
       </div>
+      <Footer/>
     </>
   );
 };

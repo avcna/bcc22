@@ -23,6 +23,10 @@ export const Input = styled.input`
 
 export const DocterCard = styled.div`
   border-radius:35px;
+  background-color:#023047;
+  padding : 29px 35px 48px;
+  color: white;
+  margin-bottom: 20px;
 `;
 
 export const Subtn = styled.button`
