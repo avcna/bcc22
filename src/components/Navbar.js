@@ -10,6 +10,7 @@ NavBtnLink,
 NavBrand
 } from './NavbarElements';
 import styled from 'styled-components';
+import { useAuth } from '../config/Auth';
 
 export const Navbrand = styled(NavBrand)`
 	margin-left: 124px;
@@ -28,6 +29,11 @@ export const Btn = styled.button`
 `;
 
 const Navbar = () => {
+	const { setAndGetTokens } = useAuth();
+	const handleLogout = () => {
+		setAndGetTokens();
+		localStorage.clear();
+	};
 return (
 	<>
 	<Nav>
@@ -49,12 +55,20 @@ return (
 		{/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}
 		</NavMenu>
 			<NavMenu2>
-		<NavLink className='nav-link nav-link2' to='/Login'>
-			Login
-		</NavLink>
-		<Btn><NavLink2 to='/Signup'>
-			Signup
-		</NavLink2></Btn>
+			{(localStorage.getItem("token") === null)?
+			<>
+			<NavLink className='nav-link nav-link2' to='/Login'>
+				Login
+			</NavLink>
+			<Btn><NavLink2 to='/Signup'>
+				Signup
+			</NavLink2> </Btn>
+			</>
+			:
+			<NavLink className='nav-link nav-link2' to='/Logout'>
+				Logout
+			</NavLink>
+		}
 		</NavMenu2>
 	</Nav>
 	</>

@@ -30,6 +30,7 @@ export const Title3 = styled(Title)`
 export const A = styled.a`
   color: #FFB703;
   text-decoration: none;
+  text-align: right;
 
   &:hover{
     color: #FFB703;
