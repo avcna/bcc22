@@ -10,6 +10,7 @@ export const ArticleCard = styled.div`
   padding : 55.79px;
   margin: 0 133px 1.5rem;
   color: white;
+  text-align: center;
 `;
 
 export const CarItem = styled.div`
@@ -27,7 +28,7 @@ export const ImgArticel = styled.img`
 `;
 
 
-export const ArticleTitle = styled.p`
+export const ArticleTitle = styled.div`
   font-family: Poppins;
   font-size: 20px;
   font-style: normal;
@@ -36,6 +37,7 @@ export const ArticleTitle = styled.p`
   letter-spacing: 0.20000000298023224px;
   text-align: center;
   color:#FFB703;
+  margin-bottom: 16px;
 `;
 
 export const Content = styled.p`

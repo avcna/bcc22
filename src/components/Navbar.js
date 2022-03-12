@@ -18,7 +18,7 @@ export const Navbrand = styled(NavBrand)`
 
 export const Btn = styled.button`
 	border-radius:25px;
-	color:#023047;
+	color: #000;
 	background-color:#FFB703;
 	border: none;
 	font-family:Poppins;
@@ -26,6 +26,18 @@ export const Btn = styled.button`
 	&:hover{
 		color:white;
 	}
+`;
+
+export const BtnLogout = styled.button`
+	color: #000;
+	border: none;
+	font-family:Poppins;
+	background-color: #fff;
+  font-size: 1.125rem;
+
+	&:hover{
+    color:#FFB703;
+  }
 `;
 
 const Navbar = () => {
@@ -65,9 +77,9 @@ return (
 			</NavLink2> </Btn>
 			</>
 			:
-			<NavLink className='nav-link nav-link2' to='/Logout'>
+			<BtnLogout onClick={handleLogout}>
 				Logout
-			</NavLink>
+			</BtnLogout>
 		}
 		</NavMenu2>
 	</Nav>

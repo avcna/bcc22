@@ -13,14 +13,14 @@ import {useNavigate} from 'react-router-dom';
 import React, { useState } from 'react';
 import {useAuth} from '../config/Auth';
 import Footer from '../components/Footer';
-import Logo from '../images/petlink.png';
+import Logo from '../images/logo.png';
 import Axios from 'axios';
 
 
 const Signup = () => {
-  const urlps='https://1990-103-108-21-98.ngrok.io/user/register';
-  const urlpl='https://1990-103-108-21-98.ngrok.io/user/login';
-  const urlgl='https://1990-103-108-21-98.ngrok.io/user';
+  const urlps='https://6017-103-108-21-76.ngrok.io/user/register';
+  const urlpl='https://6017-103-108-21-76.ngrok.io/user/login';
+  const urlgl='https://6017-103-108-21-76.ngrok.io/user';
   const { setAndGetTokens } = useAuth();
 	const navigate = useNavigate();
 	const [forms, setForms] = useState({ name:'', email :'', password:'', username :'', });

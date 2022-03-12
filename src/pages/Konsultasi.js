@@ -18,15 +18,11 @@ const steps = [
   },
   {
     title: 'Pilih Doktermu',
-    content: (
-      <Dokter/>
-    ),
+    content: <Dokter/>,
   },
   {
     title: 'Tentukan Jadwal',
-    content: (
-      <Cal/>
-    ),
+    content: <Cal/>,
   },
   {
     title: 'Pembayaran',
