@@ -5,6 +5,7 @@ import '../App.css';
 import Navbar from '../components/Navbar';
 import {BioHewan, Dokter, Pembayaran, Konfirmasi} from '../components/konsultasiCard';
 import Cal from '../components/konsultasiCalendar';
+import Jam from '../components/konsultasiJam';
 import Footer from '../components/Footer';
 
 const { Step } = Steps;
@@ -22,7 +23,7 @@ const steps = [
   },
   {
     title: 'Tentukan Jadwal',
-    content: <Cal/>,
+    content: <><Jam/></>,
   },
   {
     title: 'Pembayaran',

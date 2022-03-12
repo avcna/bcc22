@@ -10,6 +10,9 @@ import {Input,
         Label} from '../components/konsultasiElement';
 import Mandiri from '../images/mandiri2.png';
 import Bni from '../images/bni.png';
+import {useAuth} from '../config/Auth';
+import { Form, Upload, Button } from "antd";
+import { UploadOutlined } from "@ant-design/icons";
 
 export const NamaDok = styled.h3`
   font-family: Mulish;
@@ -43,6 +46,16 @@ export const P = styled.p`
 
 export const An = styled(P)`
   font-size: 13px;
+`;
+
+export const Harga = styled.button`
+  border: 4px solid #fff;
+  outline: none;
+  background-color:#FFB703;
+  border-radius: 20px;
+  font-family: Poppins;
+  padding: 5px 10px;
+  margin-top: 25px;
 `;
 
 export const BioHewan = ()=>{
@@ -96,7 +109,8 @@ export const Dokter =({id, name, email, jadwal, lokasi_kerja, meet, picture})=>{
       <Img width="400px" src={picture}/>
       <NamaDok>{name}</NamaDok>
       {jadwal} <br/>
-      {lokasi_kerja}
+      {lokasi_kerja}<br/>
+      <center><Harga>Rp 300.000/Jam</Harga></center>
       </DocterCard>
       </Col>
     })}
@@ -110,19 +124,34 @@ export const Dokter =({id, name, email, jadwal, lokasi_kerja, meet, picture})=>{
 {/*------------------------------------------pembayaran---------------------------------------------*/}
 
 export const Pembayaran = () =>{
-  const [file,setFile]=useState();
-  const handlePost = async ()=>{
-  const values = {file: file}
-  try {
-    const response = await Axios.post('',values
-    ).then(res=>{
-      setFile(res.data);
-    });
-  }
-  catch (error) {
-    console.log(error);
-  }
-  }
+  const { authToken } = useAuth();
+  const handlePost = async (values) => {
+    const formData = new FormData();
+    formData.append("file", values.file.file.originFileObj);
+    console.log(values);
+    try {
+      const response = await Axios.post(
+        "https://6017-103-108-21-76.ngrok.io/upload",
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        }
+      ).then((res) => {
+        console.log(res);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const dummyRequest = ({ file, onSuccess }) => {
+    setTimeout(() => {
+      onSuccess("ok");
+    }, 0);
+  };
+
   return(
     <Wrapper>
     <DocterCard>
@@ -151,8 +180,9 @@ export const Pembayaran = () =>{
                       margin: '0 auto'}}>
             <img width='100px' src={Mandiri}/><br/>
           </div>
-          <An style={{margin: '0 auto'}}>PT Peduli Hewan<br/>
-          no : 123456789</An>
+            <An style={{margin: '0 auto'}}>PT Peduli Hewan<br/>
+              no : 123456789
+            </An>
         </Col>
         <Col span={12}>
         <div style={{backgroundColor: "rgba(255,255,255,0.5)",
@@ -165,13 +195,24 @@ export const Pembayaran = () =>{
           <img width='100px' src={Bni}/><br/>
           </div>
           <An style={{margin: '0 auto'}}>PT Peduli Hewan<br/>
-          no : 123456789</An>
+            no : 123456789
+          </An>
         </Col>
       </Row>
-      <form onSubmit={handlePost}>
-      <input type='file'/>
-      <button type='submit' style={{color:'#000'}}>Kirim</button>
-      </form>
+      <Form onFinish={handlePost}>
+          <Form.Item name="file">
+            <Upload name="file" listType="picture" customRequest={dummyRequest}>
+            {/*accept=".jpeg"*/}
+              <Button icon={<UploadOutlined />}>Click to upload</Button>
+            </Upload>
+          </Form.Item>
+
+          <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
+            <Button type="primary" htmlType="submit">
+              Submit
+            </Button>
+          </Form.Item>
+        </Form>
     </DocterCard>
     </Wrapper>
   )

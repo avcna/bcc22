@@ -3,6 +3,9 @@ import moment from 'moment';
 import React from 'react';
 import styled from 'styled-components';
 import '../App.css'
+import Axios from 'axios';
+import {useAuth} from '../config/Auth';
+import {useState} from 'react';
 
 export const Cal = styled(Calendar)`
   width : 500px;
@@ -15,31 +18,47 @@ export const Alert2 = styled(Alert)`
   border: none;
 `;
 
-class Date extends React.Component {
-  state = {
-    value: moment('2022-01-25'),
-    selectedValue: moment('2022-01-25'),
-  };
+const Date=()=> {
+  const [value, setValue] = useState("");
+  const [selectedValue, setSelectedValue] = useState("");
 
-  onSelect = value => {
-    this.setState({
+  const onSelect = (value) => {
+    {/*this.setState({
       value,
       selectedValue: value,
-    });
+    });*/}
+    setSelectedValue(value);
   };
 
-  onPanelChange = value => {
+  {/*onPanelChange = value => {
     this.setState({ value });
-  };
+  };*/}
 
-  render() {
-    const { value, selectedValue } = this.state;
+  const onPanelChange = (value) => {
+    setValue(value);
+  }
+
+
+    const { authToken } = useAuth();
+    const handlePost = async ()=>{
+        const values = {tgl_pesan: value}
+        try {
+          const response = await Axios.post('https://6017-103-108-21-76.ngrok.io/order/time',values
+          ).then(res=>{
+            selectedValue(res.data.data);
+          });
+        }
+        catch (error) {
+          console.log(error);
+        }
+
+
     return (
       <>
         <Alert2
           message={`Anda memilih tanggal: ${selectedValue && selectedValue.format('YYYY-MM-DD')}`}
         />
-        <Cal value={value} onSelect={this.onSelect} onPanelChange={this.onPanelChange} />
+        <Cal value={value} onSelect={onSelect} onPanelChange={onPanelChange} handlePost={handlePost}/>
       </>
     );
   }
