@@ -57,8 +57,8 @@ export const PaginationWrapper = styled.div`=
 
 const Clinic = ({id,name, phone_number, address, link_google_maps})=>{
 
-    const url = 'https://6017-103-108-21-76.ngrok.io/clinic';
-    const urlp = 'https://6017-103-108-21-76.ngrok.io/clinic/search';
+    const url = 'https://17a2-103-108-23-19.ngrok.io/clinic';
+    const urlp = 'https://17a2-103-108-23-19.ngrok.io/clinic/search';
     const [search,setSearch]= useState('');
     const [load,setLoad]= useState(true);
     const [isEmpty, setEmpty]= useState(false);

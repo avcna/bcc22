@@ -14,6 +14,7 @@ import {useAuth} from '../config/Auth';
 import { Form, Upload, Button } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 
+
 export const NamaDok = styled.h3`
   font-family: Mulish;
   font-size: 32px;
@@ -49,7 +50,7 @@ export const An = styled(P)`
 `;
 
 export const Harga = styled.button`
-  border: 4px solid #fff;
+  border: 3px solid #fff;
   outline: none;
   background-color:#FFB703;
   border-radius: 20px;
@@ -59,29 +60,68 @@ export const Harga = styled.button`
 `;
 
 export const BioHewan = ()=>{
+  const [form, setForm] = useState({ nama_hewan :'',
+                                     umur_hewan :'',
+                                     jenis_kelamin:'',
+                                     jenis_hewan:'',
+                                     warna_hewan:''});
+
+  const handlePost = async ()=>{
+    try {
+      const response = await Axios.post("https://17a2-103-108-23-19.ngrok.io/biodata",{...form},
+
+      );
+    }
+    catch (error) {
+      console.log(error);
+    }
+
+  }
   return(
     <Wrapper>
     <Biodata>
-      <form>
+      <form onSubmit={handlePost}>
         <Label>Jenis Hewan</Label><br/>
-        <Input placeholder='Masukkan nama'/><br/>
+        <Input placeholder='Masukkan jenis'
+        onChange={(e) =>
+          setForm(() => ({
+            ...form, jenis_hewan: e.target.value }))}
+        /><br/>
         <Label>Nama Hewan</Label><br/>
-        <Input placeholder='Masukkan nama'/><br/>
+        <Input placeholder='Masukkan nama'
+        onChange={(e) =>
+          setForm(() => ({
+            ...form, nama_hewan: e.target.value }))}
+        /><br/>
         <Label>Usia</Label><br/>
-        <Input placeholder='Masukkan nama'/><br/>
+        <Input placeholder='Masukkan usia'
+        onChange={(e) =>
+          setForm(() => ({
+            ...form, umur_hewan: e.target.value }))}
+        /><br/>
         <Label>Jenis Kelamin</Label><br/>
-        <Input placeholder='Masukkan nama'/><br/>
+        <Input placeholder='Masukkan jenis kelamin'
+        onChange={(e) =>
+          setForm(() => ({
+            ...form, jenis_kelamin: e.target.value }))}
+        /><br/>
         <Label>Warna Hewan</Label><br/>
-        <Input placeholder='Masukkan nama'/><br/>
+        <Input placeholder='Masukkan warna'
+        onChange={(e) =>
+          setForm(() => ({
+            ...form, warna_hewan: e.target.value }))}
+        /><br/>
+        <Harga type='submit'>kirim</Harga>
       </form>
     </Biodata>
   </Wrapper>
   )
 }
 
-export const Dokter =({id, name, email, jadwal, lokasi_kerja, meet, picture})=>{
+export const Dokter =({id, name, email, jadwal, lokasi_kerja, meet, picture,price, pengalaman })=>{
   const [dokter, setDokter]= useState([]);
-  const urlget='https://6017-103-108-21-76.ngrok.io/doctor';
+  const [dokterSelected, setDokterSelected]= useState([]);
+  const urlget='https://17a2-103-108-23-19.ngrok.io/doctor';
 
   const fetchDokter = async () =>{
   try {
@@ -94,6 +134,21 @@ export const Dokter =({id, name, email, jadwal, lokasi_kerja, meet, picture})=>{
     console.log(error);
   }
   }
+  const clicked = async (id)=>{
+    const now = id;
+    const values = {id: now}
+    try {
+      const response = await Axios.post("https://17a2-103-108-23-19.ngrok.io/doctor/search",values
+      ).then(res=>{
+        setDokterSelected(res.data.data);
+      });
+    }
+    catch (error) {
+      console.log(error);
+    }
+
+  }
+
 
   useEffect(()=> {fetchDokter();
   },[]);
@@ -103,14 +158,15 @@ export const Dokter =({id, name, email, jadwal, lokasi_kerja, meet, picture})=>{
     <Wrapper>
     <Row gutter={24}>
     {dokter.map((dokter)=>{
-      const {id, name, email, jadwal, lokasi_kerja, meet, picture} = dokter;
-      return <Col span={12}>
+      const {id, name, email, jadwal, lokasi_kerja, meet, picture, price, pengalaman} = dokter;
+      return <Col key={dokter.id} span={12}>
       <DocterCard key={dokter.id} {...dokter}>
       <Img width="400px" src={picture}/>
       <NamaDok>{name}</NamaDok>
-      {jadwal} <br/>
-      {lokasi_kerja}<br/>
-      <center><Harga>Rp 300.000/Jam</Harga></center>
+      <p style={{color:'#fff'}}>Jadwal Praktik   : {jadwal}</p>
+      <p style={{color:'#fff'}}>Tempat Praktik   : {lokasi_kerja}</p>
+      <p style={{color:'#fff'}}>Pengalaman Kerja : {pengalaman} tahun</p>
+      <center><Harga id={id} onClick={(value)=>{clicked(id)}}>{price}/Jam</Harga></center>
       </DocterCard>
       </Col>
     })}
@@ -131,13 +187,9 @@ export const Pembayaran = () =>{
     console.log(values);
     try {
       const response = await Axios.post(
-        "https://6017-103-108-21-76.ngrok.io/upload",
+        "https://17a2-103-108-23-19.ngrok.io/upload",
         formData,
-        {
-          headers: {
-            Authorization: `Bearer ${authToken}`,
-          },
-        }
+
       ).then((res) => {
         console.log(res);
       });
@@ -163,7 +215,7 @@ export const Pembayaran = () =>{
           <P> Biaya Konsultasi</P>
         </Col>
         <Col span={12}>
-          <P>Rp. 5000</P>
+          <P>Rp. 30000</P>
         </Col>
         </Row>
         <JudulPembayaran>
@@ -225,8 +277,38 @@ export const Konfirmasi =()=>{
       <JudulPembayaran>
         Kamu telah berhasil melakukan<br/>reservasi konsultasi!<br/>
       </JudulPembayaran>
-        Tautan konsultasi : <a href=''>Test</a>
+        Tautan konsultasi : <a target="_blank" href='https://meet.google.com/uav-kdzi-dzo'>https://meet.google.com/uav-kdzi-dzo</a>
     </DocterCard>
+    </Wrapper>
+  )
+}
+
+export const Jam =()=>{
+  const [jam, setJam]= useState();
+  const { authToken } = useAuth();
+
+  const clicked = async (value)=>{
+    const now = value;
+    const values = {jam_konsultasi: now}
+    try {
+      const response = await Axios.post("https://17a2-103-108-23-19.ngrok.io/order/time",values,
+      {
+      headers: {
+        Authorization : `Bearer ${authToken}`
+      },}
+      ).then(res=>{
+        setJam(res.data.data);
+      });
+    }
+    catch (error) {
+      console.log(error);
+    }
+
+  }
+  return(
+    <Wrapper>
+    <button onClick={(value)=>{clicked('10.00-11.00')}}>10.00-11.00</button>
+    <button onClick={(value)=>{clicked('13.00-14.00')}}>13.00-14.00</button>
     </Wrapper>
   )
 }

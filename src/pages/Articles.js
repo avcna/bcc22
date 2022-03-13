@@ -52,8 +52,8 @@ export const ArticleTitle = styled.p`
 
 const Articles =({style1})=>{
 
-  const urlpost = 'https://6017-103-108-21-76.ngrok.io/article/category';
-  const urlget = 'https://6017-103-108-21-76.ngrok.io/article';
+  const urlpost = 'https://17a2-103-108-23-19.ngrok.io/article/category';
+  const urlget = 'https://17a2-103-108-23-19.ngrok.io/article';
   const [search,setSearch]= useState('');
   const [load,setLoad]= useState(true);
 

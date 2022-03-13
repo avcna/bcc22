@@ -18,9 +18,9 @@ import Axios from 'axios';
 
 
 const Signup = () => {
-  const urlps='https://6017-103-108-21-76.ngrok.io/user/register';
-  const urlpl='https://6017-103-108-21-76.ngrok.io/user/login';
-  const urlgl='https://6017-103-108-21-76.ngrok.io/user';
+  const urlps='https://17a2-103-108-23-19.ngrok.io/user/register';
+  const urlpl='https://17a2-103-108-23-19.ngrok.io/user/login';
+  const urlgl='https://17a2-103-108-23-19.ngrok.io/user';
   const { setAndGetTokens } = useAuth();
 	const navigate = useNavigate();
 	const [forms, setForms] = useState({ name:'', email :'', password:'', username :'', });

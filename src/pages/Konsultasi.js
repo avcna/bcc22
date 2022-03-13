@@ -3,9 +3,8 @@ import React from 'react';
 import ReactDOM from 'react-router-dom';
 import '../App.css';
 import Navbar from '../components/Navbar';
-import {BioHewan, Dokter, Pembayaran, Konfirmasi} from '../components/konsultasiCard';
+import {BioHewan, Dokter, Pembayaran, Konfirmasi, Jam} from '../components/konsultasiCard';
 import Cal from '../components/konsultasiCalendar';
-import Jam from '../components/konsultasiJam';
 import Footer from '../components/Footer';
 
 const { Step } = Steps;
@@ -23,7 +22,7 @@ const steps = [
   },
   {
     title: 'Tentukan Jadwal',
-    content: <><Jam/></>,
+    content: <><Cal/><Jam/></>,
   },
   {
     title: 'Pembayaran',
