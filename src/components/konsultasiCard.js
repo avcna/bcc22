@@ -1,19 +1,20 @@
-import {Row,Col} from 'antd';
-import {useEffect, useState} from "react";
-import Axios from 'axios';
-import styled from 'styled-components';
-import {Input,
-        Wrapper,
-        Biodata,
-        DocterCard,
-        Subtn,
-        Label} from '../components/konsultasiElement';
-import Mandiri from '../images/mandiri2.png';
-import Bni from '../images/bni.png';
-import {useAuth} from '../config/Auth';
+import { Row, Col } from "antd";
+import { useEffect, useState } from "react";
+import Axios from "axios";
+import styled from "styled-components";
+import {
+  Input,
+  Wrapper,
+  Biodata,
+  DocterCard,
+  Subtn,
+  Label,
+} from "../components/konsultasiElement";
+import Mandiri from "../images/mandiri2.png";
+import Bni from "../images/bni.png";
+import { useAuth } from "../config/Auth";
 import { Form, Upload, Button } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
-
 
 export const NamaDok = styled.h3`
   font-family: Mulish;
@@ -50,136 +51,212 @@ export const An = styled(P)`
 `;
 
 export const Harga = styled.button`
-  border: 3px solid #fff;
+  border: 2px solid #fff;
   outline: none;
-  background-color:#FFB703;
+  background-color: #ffb703;
   border-radius: 20px;
   font-family: Poppins;
-  padding: 5px 10px;
+  padding: 5px 20px;
+  margin-top: 25px;
+  margin-left: 720px;
+`;
+
+export const Harga2 = styled.button`
+  border: 2px solid #fff;
+  outline: none;
+  background-color: #ffb703;
+  border-radius: 20px;
+  font-family: Poppins;
+  padding: 5px 20px;
   margin-top: 25px;
 `;
 
-export const BioHewan = ()=>{
-  const [form, setForm] = useState({ nama_hewan :'',
-                                     umur_hewan :'',
-                                     jenis_kelamin:'',
-                                     jenis_hewan:'',
-                                     warna_hewan:''});
+export const BioHewan = () => {
+  const [form, setForm] = useState({
+    nama_hewan: "",
+    umur_hewan: "",
+    jenis_kelamin: "",
+    jenis_hewan: "",
+    warna_hewan: "",
+  });
 
-  const handlePost = async ()=>{
+  const handlePost = async () => {
     try {
-      const response = await Axios.post("https://17a2-103-108-23-19.ngrok.io/biodata",{...form},
-
+      const response = await Axios.post(
+        "https://17a2-103-108-23-19.ngrok.io/biodata",
+        { ...form }
       );
-    }
-    catch (error) {
+    } catch (error) {
       console.log(error);
     }
-
-  }
-  return(
+  };
+  return (
     <Wrapper>
-    <Biodata>
-      <form onSubmit={handlePost}>
-        <Label>Jenis Hewan</Label><br/>
-        <Input placeholder='Masukkan jenis'
-        onChange={(e) =>
-          setForm(() => ({
-            ...form, jenis_hewan: e.target.value }))}
-        /><br/>
-        <Label>Nama Hewan</Label><br/>
-        <Input placeholder='Masukkan nama'
-        onChange={(e) =>
-          setForm(() => ({
-            ...form, nama_hewan: e.target.value }))}
-        /><br/>
-        <Label>Usia</Label><br/>
-        <Input placeholder='Masukkan usia'
-        onChange={(e) =>
-          setForm(() => ({
-            ...form, umur_hewan: e.target.value }))}
-        /><br/>
-        <Label>Jenis Kelamin</Label><br/>
-        <Input placeholder='Masukkan jenis kelamin'
-        onChange={(e) =>
-          setForm(() => ({
-            ...form, jenis_kelamin: e.target.value }))}
-        /><br/>
-        <Label>Warna Hewan</Label><br/>
-        <Input placeholder='Masukkan warna'
-        onChange={(e) =>
-          setForm(() => ({
-            ...form, warna_hewan: e.target.value }))}
-        /><br/>
-        <Harga type='submit'>kirim</Harga>
-      </form>
-    </Biodata>
-  </Wrapper>
-  )
-}
+      <Biodata>
+        <form onSubmit={handlePost}>
+          <Label>Jenis Hewan</Label>
+          <br />
+          <Input
+            placeholder="Masukkan jenis"
+            onChange={(e) =>
+              setForm(() => ({
+                ...form,
+                jenis_hewan: e.target.value,
+              }))
+            }
+          />
+          <br />
+          <Label>Nama Hewan</Label>
+          <br />
+          <Input
+            placeholder="Masukkan nama"
+            onChange={(e) =>
+              setForm(() => ({
+                ...form,
+                nama_hewan: e.target.value,
+              }))
+            }
+          />
+          <br />
+          <Label>Usia</Label>
+          <br />
+          <Input
+            placeholder="Masukkan usia"
+            onChange={(e) =>
+              setForm(() => ({
+                ...form,
+                umur_hewan: e.target.value,
+              }))
+            }
+          />
+          <br />
+          <Label>Jenis Kelamin</Label>
+          <br />
+          <Input
+            placeholder="Masukkan jenis kelamin"
+            onChange={(e) =>
+              setForm(() => ({
+                ...form,
+                jenis_kelamin: e.target.value,
+              }))
+            }
+          />
+          <br />
+          <Label>Warna Hewan</Label>
+          <br />
+          <Input
+            placeholder="Masukkan warna"
+            onChange={(e) =>
+              setForm(() => ({
+                ...form,
+                warna_hewan: e.target.value,
+              }))
+            }
+          />
+          <br />
+          <Harga type="submit">kirim</Harga>
+        </form>
+      </Biodata>
+    </Wrapper>
+  );
+};
 
-export const Dokter =({id, name, email, jadwal, lokasi_kerja, meet, picture,price, pengalaman })=>{
-  const [dokter, setDokter]= useState([]);
-  const [dokterSelected, setDokterSelected]= useState([]);
-  const urlget='https://17a2-103-108-23-19.ngrok.io/doctor';
+export const Dokter = ({
+  id,
+  name,
+  email,
+  jadwal,
+  lokasi_kerja,
+  meet,
+  picture,
+  price,
+  pengalaman,
+}) => {
+  const [dokter, setDokter] = useState([]);
+  const [dokterSelected, setDokterSelected] = useState([]);
+  const urlget = "https://17a2-103-108-23-19.ngrok.io/doctor";
 
-  const fetchDokter = async () =>{
-  try {
-    const response = await Axios.get(urlget
-    ).then(res=>{
-      setDokter(res.data.data);
-    });
-  }
-  catch (error) {
-    console.log(error);
-  }
-  }
-  const clicked = async (id)=>{
-    const now = id;
-    const values = {id: now}
+  const fetchDokter = async () => {
     try {
-      const response = await Axios.post("https://17a2-103-108-23-19.ngrok.io/doctor/search",values
-      ).then(res=>{
+      const response = await Axios.get(urlget).then((res) => {
+        setDokter(res.data.data);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const clicked = async (id) => {
+    const now = id;
+    const values = { id: now };
+    try {
+      const response = await Axios.post(
+        "https://17a2-103-108-23-19.ngrok.io/doctor/search",
+        values
+      ).then((res) => {
         setDokterSelected(res.data.data);
       });
-    }
-    catch (error) {
+    } catch (error) {
       console.log(error);
     }
+  };
 
-  }
+  useEffect(() => {
+    fetchDokter();
+  }, []);
 
-
-  useEffect(()=> {fetchDokter();
-  },[]);
-
-  return(
+  return (
     <>
-    <Wrapper>
-    <Row gutter={24}>
-    {dokter.map((dokter)=>{
-      const {id, name, email, jadwal, lokasi_kerja, meet, picture, price, pengalaman} = dokter;
-      return <Col key={dokter.id} span={12}>
-      <DocterCard key={dokter.id} {...dokter}>
-      <Img width="400px" src={picture}/>
-      <NamaDok>{name}</NamaDok>
-      <p style={{color:'#fff'}}>Jadwal Praktik   : {jadwal}</p>
-      <p style={{color:'#fff'}}>Tempat Praktik   : {lokasi_kerja}</p>
-      <p style={{color:'#fff'}}>Pengalaman Kerja : {pengalaman} tahun</p>
-      <center><Harga id={id} onClick={(value)=>{clicked(id)}}>{price}/Jam</Harga></center>
-      </DocterCard>
-      </Col>
-    })}
-
-      </Row>
+      <Wrapper>
+        <Row gutter={24}>
+          {dokter.map((dokter) => {
+            const {
+              id,
+              name,
+              email,
+              jadwal,
+              lokasi_kerja,
+              meet,
+              picture,
+              price,
+              pengalaman,
+            } = dokter;
+            return (
+              <Col key={dokter.id} span={12}>
+                <DocterCard key={dokter.id} {...dokter}>
+                  <Img width="400px" src={picture} />
+                  <NamaDok>{name}</NamaDok>
+                  <p style={{ color: "#fff" }}>Jadwal Praktik : {jadwal}</p>
+                  <p style={{ color: "#fff" }}>
+                    Tempat Praktik : {lokasi_kerja}
+                  </p>
+                  <p style={{ color: "#fff" }}>
+                    Pengalaman Kerja : {pengalaman} tahun
+                  </p>
+                  <center>
+                    <Harga
+                      id={id}
+                      onClick={(value) => {
+                        clicked(id);
+                      }}
+                    >
+                      {price}/Jam
+                    </Harga>
+                  </center>
+                </DocterCard>
+              </Col>
+            );
+          })}
+        </Row>
       </Wrapper>
     </>
-  )
+  );
+};
+
+{
+  /*------------------------------------------pembayaran---------------------------------------------*/
 }
 
-{/*------------------------------------------pembayaran---------------------------------------------*/}
-
-export const Pembayaran = () =>{
+export const Pembayaran = () => {
   const { authToken } = useAuth();
   const handlePost = async (values) => {
     const formData = new FormData();
@@ -188,8 +265,7 @@ export const Pembayaran = () =>{
     try {
       const response = await Axios.post(
         "https://17a2-103-108-23-19.ngrok.io/upload",
-        formData,
-
+        formData
       ).then((res) => {
         console.log(res);
       });
@@ -204,57 +280,67 @@ export const Pembayaran = () =>{
     }, 0);
   };
 
-  return(
+  return (
     <Wrapper>
-    <DocterCard>
-    <JudulPembayaran>
-      Detail Pembayaran
-    </JudulPembayaran>
-      <Row>
-        <Col span={12}>
-          <P> Biaya Konsultasi</P>
-        </Col>
-        <Col span={12}>
-          <P>Rp. 30000</P>
-        </Col>
-        </Row>
-        <JudulPembayaran>
-          Rekening Tujuan
-        </JudulPembayaran>
+      <DocterCard>
+        <JudulPembayaran>Detail Pembayaran</JudulPembayaran>
         <Row>
-        <Col span={12}>
-          <div style={{backgroundColor: "rgba(255,255,255,0.5)",
-                      borderRadius: "20px",
-                      height:'50px',
-                      width:'80%',
-                      display:'flex',
-                      justifyContent:"center",
-                      margin: '0 auto'}}>
-            <img width='100px' src={Mandiri}/><br/>
-          </div>
-            <An style={{margin: '0 auto'}}>PT Peduli Hewan<br/>
+          <Col span={12}>
+            <P> Biaya Konsultasi</P>
+          </Col>
+          <Col span={12}>
+            <P>Rp. 30000</P>
+          </Col>
+        </Row>
+        <JudulPembayaran>Rekening Tujuan</JudulPembayaran>
+        <Row>
+          <Col span={12}>
+            <div
+              style={{
+                backgroundColor: "rgba(255,255,255,0.5)",
+                borderRadius: "20px",
+                height: "50px",
+                width: "80%",
+                display: "flex",
+                justifyContent: "center",
+                margin: "0 auto",
+              }}
+            >
+              <img width="100px" src={Mandiri} />
+              <br />
+            </div>
+            <An style={{ margin: "0 auto" }}>
+              PT Peduli Hewan
+              <br />
               no : 123456789
             </An>
-        </Col>
-        <Col span={12}>
-        <div style={{backgroundColor: "rgba(255,255,255,0.5)",
-                    borderRadius: "20px",
-                    height:'50px',
-                    width:'80%',
-                    display:'flex',
-                    justifyContent:"center",
-                    margin: '0 auto'}}>
-          <img width='100px' src={Bni}/><br/>
-          </div>
-          <An style={{margin: '0 auto'}}>PT Peduli Hewan<br/>
-            no : 123456789
-          </An>
-        </Col>
-      </Row>
-      <Form onFinish={handlePost}>
+          </Col>
+          <Col span={12}>
+            <div
+              style={{
+                backgroundColor: "rgba(255,255,255,0.5)",
+                borderRadius: "20px",
+                height: "50px",
+                width: "80%",
+                display: "flex",
+                justifyContent: "center",
+                margin: "0 auto",
+              }}
+            >
+              <img width="100px" src={Bni} />
+              <br />
+            </div>
+            <An style={{ margin: "0 auto" }}>
+              PT Peduli Hewan
+              <br />
+              no : 123456789
+            </An>
+          </Col>
+        </Row>
+        <Form onFinish={handlePost}>
           <Form.Item name="file">
             <Upload name="file" listType="picture" customRequest={dummyRequest}>
-            {/*accept=".jpeg"*/}
+              {/*accept=".jpeg"*/}
               <Button icon={<UploadOutlined />}>Click to upload</Button>
             </Upload>
           </Form.Item>
@@ -265,50 +351,69 @@ export const Pembayaran = () =>{
             </Button>
           </Form.Item>
         </Form>
-    </DocterCard>
+      </DocterCard>
     </Wrapper>
-  )
-}
+  );
+};
 
-export const Konfirmasi =()=>{
-  return(
+export const Konfirmasi = () => {
+  return (
     <Wrapper>
-    <DocterCard>
-      <JudulPembayaran>
-        Kamu telah berhasil melakukan<br/>reservasi konsultasi!<br/>
-      </JudulPembayaran>
-        Tautan konsultasi : <a target="_blank" href='https://meet.google.com/uav-kdzi-dzo'>https://meet.google.com/uav-kdzi-dzo</a>
-    </DocterCard>
+      <DocterCard>
+        <JudulPembayaran>
+          Kamu telah berhasil melakukan
+          <br />
+          reservasi konsultasi!
+          <br />
+        </JudulPembayaran>
+        Tautan konsultasi :{" "}
+        <a target="_blank" href="https://meet.google.com/uav-kdzi-dzo">
+          https://meet.google.com/uav-kdzi-dzo
+        </a>
+      </DocterCard>
     </Wrapper>
-  )
-}
+  );
+};
 
-export const Jam =()=>{
-  const [jam, setJam]= useState();
+export const Jam = () => {
+  const [jam, setJam] = useState();
   const { authToken } = useAuth();
 
-  const clicked = async (value)=>{
+  const clicked = async (value) => {
     const now = value;
-    const values = {jam_konsultasi: now}
+    const values = { jam_konsultasi: now };
     try {
-      const response = await Axios.post("https://17a2-103-108-23-19.ngrok.io/order/time",values,
-      {
-      headers: {
-        Authorization : `Bearer ${authToken}`
-      },}
-      ).then(res=>{
+      const response = await Axios.post(
+        "https://17a2-103-108-23-19.ngrok.io/order/time",
+        values,
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        }
+      ).then((res) => {
         setJam(res.data.data);
       });
-    }
-    catch (error) {
+    } catch (error) {
       console.log(error);
     }
-
-  }
-  return(
+  };
+  return (
     <Wrapper>
-    <button onClick={(value)=>{clicked('10.00-11.00')}}>10.00-11.00</button>
-    <button onClick={(value)=>{clicked('13.00-14.00')}}>13.00-14.00</button>
+      <Harga2
+        onClick={(value) => {
+          clicked("10.00-11.00");
+        }}
+      >
+        10.00-11.00
+      </Harga2>
+      <Harga2
+        onClick={(value) => {
+          clicked("13.00-14.00");
+        }}
+      >
+        13.00-14.00
+      </Harga2>
     </Wrapper>
-  )
-}
+  );
+};

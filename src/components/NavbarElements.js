@@ -1,15 +1,15 @@
-import { NavLink as Link } from 'react-router-dom';
-import styled from 'styled-components';
-import Container from 'react-bootstrap/Container'
-import Navbar from 'react-bootstrap/Navbar';
-import Logo from '../images/logo.png';
+import { NavLink as Link } from "react-router-dom";
+import styled from "styled-components";
+import Container from "react-bootstrap/Container";
+import Navbar from "react-bootstrap/Navbar";
+import Logo from "../images/logo.png";
 
 export const Nav = styled.nav`
   background-color: white;
   display: flex;
   justify-content: space-between;
   padding: 0.7rem calc((100vw - 1000px) / 2);
-  padding-left:  3.5rem;
+  padding-left: 3.5rem;
   padding-right: 2rem;
   z-index: 12;
 `;
@@ -27,11 +27,11 @@ export const NavLink = styled(Link)`
 
   &.active {
     font-weight: bold;
-    color:#000;
+    color: #000;
   }
 
-  &:hover{
-    color:#FFB703;
+  &:hover {
+    color: #ffb703;
   }
 `;
 
@@ -48,12 +48,12 @@ export const NavLink2 = styled(Link)`
 
   &.active {
     font-weight: bold;
-    color:#000;
+    color: #000;
   }
 
-  &:hover{
-    color:white;
-    text-decoration:none;
+  &:hover {
+    color: white;
+    text-decoration: none;
   }
 `;
 
@@ -78,15 +78,14 @@ export const NavMenu2 = styled.div`
   }
 `;
 
-export const NavBrand = ()=>{
-  return(
+export const NavBrand = () => {
+  return (
     <>
-    <Navbar.Brand>
-      <Link to="/">
-      <img width='170px' className="img-responsive" src={Logo} alt="logo" />
-
-      </Link>
-    </Navbar.Brand>
+      <Navbar.Brand>
+        <Link to="/">
+          <img width="170px" className="img-responsive" src={Logo} alt="logo" />
+        </Link>
+      </Navbar.Brand>
     </>
-  )
-}
+  );
+};

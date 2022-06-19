@@ -1,36 +1,45 @@
-import { Steps, Button, message } from 'antd';
-import React from 'react';
-import ReactDOM from 'react-router-dom';
-import '../App.css';
-import Navbar from '../components/Navbar';
-import {BioHewan, Dokter, Pembayaran, Konfirmasi, Jam} from '../components/konsultasiCard';
-import Cal from '../components/konsultasiCalendar';
-import Footer from '../components/Footer';
+import { Steps, Button, message } from "antd";
+import React from "react";
+import ReactDOM from "react-router-dom";
+import "../App.css";
+import Navbar from "../components/Navbar";
+import {
+  BioHewan,
+  Dokter,
+  Pembayaran,
+  Konfirmasi,
+  Jam,
+} from "../components/konsultasiCard";
+import Cal from "../components/konsultasiCalendar";
+import Footer from "../components/Footer";
 
 const { Step } = Steps;
 
 const steps = [
   {
-    title: 'Konsultasi sekarang',
+    title: "Konsultasi sekarang",
+    content: <BioHewan />,
+  },
+  {
+    title: "Pilih Doktermu",
+    content: <Dokter />,
+  },
+  {
+    title: "Tentukan Jadwal",
     content: (
-      <BioHewan/>
-  ),
+      <>
+        <Cal />
+        <Jam />
+      </>
+    ),
   },
   {
-    title: 'Pilih Doktermu',
-    content: <Dokter/>,
+    title: "Pembayaran",
+    content: <Pembayaran />,
   },
   {
-    title: 'Tentukan Jadwal',
-    content: <><Cal/><Jam/></>,
-  },
-  {
-    title: 'Pembayaran',
-    content: <Pembayaran/>,
-  },
-  {
-    title: 'Konfirmasi',
-    content: <Konfirmasi/>,
+    title: "Konfirmasi",
+    content: <Konfirmasi />,
   },
 ];
 
@@ -47,33 +56,58 @@ export const Konsultasi = () => {
 
   return (
     <>
-    <div className='nav-div'>
-      <Navbar />
-    </div>
+      <div className="nav-div">
+        <Navbar />
+      </div>
       <Steps current={current}>
-        {steps.map(item => (
+        {steps.map((item) => (
           <Step key={item.title} title={item.title} />
         ))}
       </Steps>
       <div className="steps-content">{steps[current].content}</div>
       <div className="steps-action">
-      {current > 0 && (
-        <Button style={{ margin: '0 8px', background: "#FFF", borderColor: "#FFB703", fontFamily:"Poppins", color: "#FFB703" }} onClick={() => prev()}>
-          Kembali
-        </Button>
-      )}
+        {current > 0 && (
+          <Button
+            style={{
+              margin: "0 8px",
+              background: "#FFF",
+              borderColor: "#FFB703",
+              fontFamily: "Poppins",
+              color: "#FFB703",
+            }}
+            onClick={() => prev()}
+          >
+            Kembali
+          </Button>
+        )}
         {current < steps.length - 1 && (
-          <Button type='primary' style={{ background: "#FFB703", border: "none", fontFamily:"Poppins" }} onClick={() => next()}>
+          <Button
+            type="primary"
+            style={{
+              background: "#FFB703",
+              border: "none",
+              fontFamily: "Poppins",
+            }}
+            onClick={() => next()}
+          >
             Selanjutnya
           </Button>
         )}
         {current === steps.length - 1 && (
-          <Button type='primary' style={{ background: "#FFB703", border: "none", fontFamily:"Poppins" }} onClick={() => message.success('Processing complete!')}>
+          <Button
+            type="primary"
+            style={{
+              background: "#FFB703",
+              border: "none",
+              fontFamily: "Poppins",
+            }}
+            onClick={() => message.success("Processing complete!")}
+          >
             Selesai
           </Button>
         )}
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };

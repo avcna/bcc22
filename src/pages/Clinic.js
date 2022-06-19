@@ -1,22 +1,23 @@
-import {Card,
+import {
+  Card,
   DivSearch,
   Img,
   SearchInput,
   Klinik,
-  ClinicName}
-  from '../components/ClinicElement';
-import {Section,Title} from '../components/Basic';
-import styled from 'styled-components';
-import Footer from '../components/Footer';
-import {useEffect, useState} from "react";
-import searchIcon from '../images/magnifying-glass.png';
-import Pagination from '../components/pagination';
-import Axios from 'axios';
-import Loading from '../components/loading';
-import '../App.css';
-import Phone from '../images/phone.png';
-import Map from '../images/map.png';
-import Navbar from '../components/Navbar';
+  ClinicName,
+} from "../components/ClinicElement";
+import { Section, Title } from "../components/Basic";
+import styled from "styled-components";
+import Footer from "../components/Footer";
+import { useEffect, useState } from "react";
+import searchIcon from "../images/magnifying-glass.png";
+import Pagination from "../components/pagination";
+import Axios from "axios";
+import Loading from "../components/loading";
+import "../App.css";
+import Phone from "../images/phone.png";
+import Map from "../images/map.png";
+import Navbar from "../components/Navbar";
 
 export const Title2 = styled(Title)`
   padding: 81px 165px 30px;
@@ -24,16 +25,16 @@ export const Title2 = styled(Title)`
 
 export const Title3 = styled(Title)`
   padding: 81px 165px 30px;
-  color:red;
+  color: red;
 `;
 
 export const A = styled.a`
-  color: #FFB703;
+  color: #ffb703;
   text-decoration: none;
   text-align: right;
 
-  &:hover{
-    color: #FFB703;
+  &:hover {
+    color: #ffb703;
     text-decoration: underline;
   }
 `;
@@ -45,8 +46,8 @@ export const Paging = styled(Pagination)`
 `;
 
 export const Icon = styled.img`
-   margin-right: 21px;
-   height: 17px;
+  margin-right: 21px;
+  height: 17px;
 `;
 
 export const PaginationWrapper = styled.div`=
@@ -55,102 +56,106 @@ export const PaginationWrapper = styled.div`=
   margin: 5rem 0 4rem;
 `;
 
-const Clinic = ({id,name, phone_number, address, link_google_maps})=>{
+const Clinic = ({ id, name, phone_number, address, link_google_maps }) => {
+  const url = "https://17a2-103-108-23-19.ngrok.io/clinic";
+  const urlp = "https://17a2-103-108-23-19.ngrok.io/clinic/search";
+  const [search, setSearch] = useState("");
+  const [load, setLoad] = useState(true);
+  const [isEmpty, setEmpty] = useState(false);
 
-    const url = 'https://17a2-103-108-23-19.ngrok.io/clinic';
-    const urlp = 'https://17a2-103-108-23-19.ngrok.io/clinic/search';
-    const [search,setSearch]= useState('');
-    const [load,setLoad]= useState(true);
-    const [isEmpty, setEmpty]= useState(false);
-
-    const fetchClinic = async () =>{
-      setLoad(true);
+  const fetchClinic = async () => {
+    setLoad(true);
 
     try {
-      const response = await Axios.get(url
-      ).then(res=>{
+      const response = await Axios.get(url).then((res) => {
         setClinic(res.data.data);
       });
       setLoad(false);
-    }
-    catch (error) {
+    } catch (error) {
       setLoad(false);
       console.log(error);
     }
+  };
+
+  useEffect(() => {
+    fetchClinic();
+  }, []);
+
+  function handle(event) {
+    setSearch(event.target.value);
   }
 
-  useEffect(()=> {fetchClinic();
-  },[]);
-
-    function handle(event) {
-      setSearch(event.target.value);
-    }
-
-    const handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
       handlePost();
     }
-  }
+  };
 
-  const handlePost = async ()=>{
-    const values = {location: search}
+  const handlePost = async () => {
+    const values = { location: search };
     try {
-      const response = await Axios.post(urlp,values
-      ).then(res=>{
+      const response = await Axios.post(urlp, values).then((res) => {
         setClinic(res.data.data);
       });
-    }
-    catch (error) {
+    } catch (error) {
       console.log(error);
     }
+  };
 
-  }
+  const [clinic, setClinic] = useState([]);
+  const [nama, setNama] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(10);
 
-    const [clinic,setClinic] = useState([]);
-    const [nama, setNama] = useState('');
-    const [currentPage, setCurrentPage] = useState(1);
-    const [postsPerPage] = useState(10);
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = clinic.slice(indexOfFirstPost, indexOfLastPost);
 
-    const indexOfLastPost = currentPage * postsPerPage;
-    const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    const currentPosts = clinic.slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-    const paginate = pageNumber => setCurrentPage(pageNumber);
-
-    return(
-
+  return (
     <div>
-    <div className='nav-div'>
-    <Navbar />
-    </div>
-    <section>
-    <div style={{display: 'flex', justifyContent: 'center'}}>
-    <DivSearch style={{display: 'flex', justifyContent: 'center'}}>
-      <Img src={searchIcon}/>
-      <SearchInput type='text' placeholder='Cari Lokasi' onKeyDown={handleKeyDown} onChange={(event)=>{
-        handle(event)
-        }
-      }
-      />
-    </DivSearch>
-    </div>
-    </section>
-    <section>
-    <Title2>Daftar Klinik Hewan</Title2>
-    {load && (<Loading></Loading>)}
-    {currentPosts.map((currentPosts)=>{
-    const {id, name, phone_number, address, link_google_maps} = currentPosts;
-    return <Card key={currentPosts.id} {...currentPosts}>
-    <ClinicName>{name}</ClinicName>
-    <Icon src={Phone}/>
-    {phone_number} <br/>
-    <Icon src={Map}/>
-    {address}<br/>
-    <A target="_blank" href={link_google_maps}> Lihat di map</A>
-    </Card>
-  })}
+      <div className="nav-div">
+        <Navbar />
+      </div>
+      <section>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <DivSearch style={{ display: "flex", justifyContent: "center" }}>
+            <Img src={searchIcon} />
+            <SearchInput
+              type="text"
+              placeholder="Cari Lokasi"
+              onKeyDown={handleKeyDown}
+              onChange={(event) => {
+                handle(event);
+              }}
+            />
+          </DivSearch>
+        </div>
+      </section>
+      <section>
+        <Title2>Daftar Klinik Hewan</Title2>
+        {load && <Loading></Loading>}
+        {currentPosts.map((currentPosts) => {
+          const { id, name, phone_number, address, link_google_maps } =
+            currentPosts;
+          return (
+            <Card key={currentPosts.id} {...currentPosts}>
+              <ClinicName>{name}</ClinicName>
+              <Icon src={Phone} />
+              {phone_number} <br />
+              <Icon src={Map} />
+              {address}
+              <br />
+              <A target="_blank" href={link_google_maps}>
+                {" "}
+                Lihat di map
+              </A>
+            </Card>
+          );
+        })}
 
-    <PaginationWrapper>
+        <PaginationWrapper>
           <Paging
             postsPerPage={postsPerPage}
             totalPosts={clinic.length}
@@ -158,10 +163,10 @@ const Clinic = ({id,name, phone_number, address, link_google_maps})=>{
           />
         </PaginationWrapper>
 
-    <Footer/>
-    </section>
+        <Footer />
+      </section>
     </div>
-  )
+  );
 };
 
 export default Clinic;
