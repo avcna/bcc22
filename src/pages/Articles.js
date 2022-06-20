@@ -50,7 +50,7 @@ export const ArticleTitle = styled.p`
 `;
 
 const Articles = ({ style1 }) => {
-  const urlpost = "http://localhost:8080/article/category";
+  const urlpost = "https://rebuild-intern-bcc.herokuapp.com/article/category";
   const urlget = "https://rebuild-intern-bcc.herokuapp.com/article";
   const [search, setSearch] = useState("");
   const [load, setLoad] = useState(true);
@@ -141,70 +141,70 @@ const Articles = ({ style1 }) => {
           <Title>Kategori</Title>
           <Button
             onClick={(value) => {
-              clicked("kucing");
+              clicked("Kucing");
             }}
           >
             Kucing
           </Button>
           <Button
             onClick={(value) => {
-              clicked("anjing");
+              clicked("Anjing");
             }}
           >
             Anjing
           </Button>
           <Button
             onClick={(value) => {
-              clicked("kelinci");
+              clicked("Kelinci");
             }}
           >
             Kelinci
           </Button>
           <Button
             onClick={(value) => {
-              clicked("hamster");
+              clicked("Hamster");
             }}
           >
             Hamster
           </Button>
           <Button
             onClick={(value) => {
-              clicked("ikan");
+              clicked("Ikan");
             }}
           >
             Ikan
           </Button>
           <Button
             onClick={(value) => {
-              clicked("reptil");
+              clicked("Reptil");
             }}
           >
             Reptil
           </Button>
           <Button
             onClick={(value) => {
-              clicked("perawatan");
+              clicked("Perawatan");
             }}
           >
             Perawatan
           </Button>
           <Button
             onClick={(value) => {
-              clicked("kesehatan");
+              clicked("Kesehatan");
             }}
           >
             Kesehatan
           </Button>
           <Button
             onClick={(value) => {
-              clicked("penanganan pertama");
+              clicked("Penanganan pertama");
             }}
           >
             Penanganan Pertama
           </Button>
           <Button
             onClick={(value) => {
-              clicked("burung");
+              clicked("Burung");
             }}
           >
             Burung

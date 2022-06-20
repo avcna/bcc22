@@ -18,9 +18,9 @@ import Logo from "../images/logo.png";
 import Axios from "axios";
 
 const Signup = () => {
-  const urlps = "https://17a2-103-108-23-19.ngrok.io/user/register";
-  const urlpl = "https://17a2-103-108-23-19.ngrok.io/user/login";
-  const urlgl = "https://17a2-103-108-23-19.ngrok.io/user";
+  const urlps = "https://rebuild-intern-bcc.herokuapp.com/user/register";
+  const urlpl = "https://rebuild-intern-bcc.herokuapp.com/user/login";
+  const urlgl = "https://rebuild-intern-bcc.herokuapp.com/user";
   const { setAndGetTokens } = useAuth();
   const navigate = useNavigate();
   const [forms, setForms] = useState({

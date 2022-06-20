@@ -84,8 +84,8 @@ export const P = styled.p`
 const Login = () => {
   const { setAndGetTokens } = useAuth();
   const navigate = useNavigate();
-  const urlpl = "https://17a2-103-108-23-19.ngrok.io/user/login";
-  const urlgl = "https://17a2-103-108-23-19.ngrok.io/user";
+  const urlpl = "https://rebuild-intern-bcc.herokuapp.com/user/login";
+  const urlgl = "https://rebuild-intern-bcc.herokuapp.com/user";
   const [forms, setForms] = useState({ email: "", password: "" });
   const [isError, setIsError] = useState({ status: false, message: "" });
   const handleLogin = async (e) => {
