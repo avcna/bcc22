@@ -163,17 +163,7 @@ export const BioHewan = () => {
   );
 };
 
-export const Dokter = ({
-  id,
-  name,
-  email,
-  jadwal,
-  lokasi_kerja,
-  meet,
-  picture,
-  price,
-  pengalaman,
-}) => {
+export const Dokter = () => {
   const [dokter, setDokter] = useState([]);
   const [dokterSelected, setDokterSelected] = useState([]);
 
@@ -206,8 +196,8 @@ export const Dokter = ({
 
   return (
     <>
-      <Wrapper>
-        <Row gutter={24}>
+      <Wrapper style={{ margin: "auto 100px" }}>
+        <Row gutter={[64, 24]}>
           {dokter.map((dokter) => {
             const {
               id,
@@ -223,7 +213,13 @@ export const Dokter = ({
             return (
               <Col key={dokter.id} span={12}>
                 <DocterCard key={dokter.id} {...dokter}>
-                  <Img width="400px" src={picture} />
+                  <center>
+                    <Img
+                      width="400px"
+                      src={picture}
+                      style={{ marginBottom: "30px" }}
+                    />
+                  </center>
                   <NamaDok>{name}</NamaDok>
                   <p style={{ color: "#fff" }}>Jadwal Praktik : {jadwal}</p>
                   <p style={{ color: "#fff" }}>
