@@ -12,12 +12,12 @@ import Footer from "../components/Footer";
 import { useEffect, useState } from "react";
 import searchIcon from "../images/magnifying-glass.png";
 import Pagination from "../components/pagination";
-import Axios from "axios";
 import Loading from "../components/loading";
 import "../App.css";
 import Phone from "../images/phone.png";
 import Map from "../images/map.png";
 import Navbar from "../components/Navbar";
+import { petlinkAPI } from "../config/api";
 
 export const Title2 = styled(Title)`
   padding: 81px 165px 30px;
@@ -57,8 +57,6 @@ export const PaginationWrapper = styled.div`=
 `;
 
 const Clinic = ({ id, name, phone_number, address, link_google_maps }) => {
-  const url = "https://17a2-103-108-23-19.ngrok.io/clinic";
-  const urlp = "https://17a2-103-108-23-19.ngrok.io/clinic/search";
   const [search, setSearch] = useState("");
   const [load, setLoad] = useState(true);
   const [isEmpty, setEmpty] = useState(false);
@@ -67,7 +65,7 @@ const Clinic = ({ id, name, phone_number, address, link_google_maps }) => {
     setLoad(true);
 
     try {
-      const response = await Axios.get(url).then((res) => {
+      const response = await petlinkAPI.get("/clinic").then((res) => {
         setClinic(res.data.data);
       });
       setLoad(false);
@@ -94,9 +92,11 @@ const Clinic = ({ id, name, phone_number, address, link_google_maps }) => {
   const handlePost = async () => {
     const values = { location: search };
     try {
-      const response = await Axios.post(urlp, values).then((res) => {
-        setClinic(res.data.data);
-      });
+      const response = await petlinkAPI
+        .post("/clinic/search", values)
+        .then((res) => {
+          setClinic(res.data.data);
+        });
     } catch (error) {
       console.log(error);
     }

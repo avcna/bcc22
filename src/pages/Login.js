@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { useAuth } from "../config/Auth";
 import Logo from "../images/logo.png";
 import Footer from "../components/Footer";
-import Axios from "axios";
+import { petlinkAPI } from "../config/api";
 
 export const FormWrapper = styled.section`
   width: 806px;
@@ -84,22 +84,20 @@ export const P = styled.p`
 const Login = () => {
   const { setAndGetTokens } = useAuth();
   const navigate = useNavigate();
-  const urlpl = "https://rebuild-intern-bcc.herokuapp.com/user/login";
-  const urlgl = "https://rebuild-intern-bcc.herokuapp.com/user";
   const [forms, setForms] = useState({ email: "", password: "" });
   const [isError, setIsError] = useState({ status: false, message: "" });
   const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
-      const loginResponse = await Axios.post(urlpl, {
+      const loginResponse = await petlinkAPI.post("/login", {
         ...forms,
       });
       console.log(loginResponse);
 
       if (loginResponse.data.success) {
         const token = loginResponse.data.data.token;
-        const currentUser = await Axios.get(urlgl, {
+        const currentUser = await petlinkAPI.get("/user", {
           headers: {
             Authorization: `Bearer ${token}`,
           },

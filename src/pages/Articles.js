@@ -5,13 +5,13 @@ import { Title } from "../components/Basic";
 import { Style1 } from "../components/ArtikelElements";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
-import Axios from "axios";
 import Navbar from "../components/Navbar";
 import "../App.css";
 import Pagination from "../components/pagination";
 import { PaginationWrapper } from "./Clinic";
 import { Paging } from "./Clinic";
 import Loading from "../components/loading";
+import { petlinkAPI } from "../config/api";
 
 export const Button = styled.button`
   background-color: #ffb703;
@@ -50,8 +50,6 @@ export const ArticleTitle = styled.p`
 `;
 
 const Articles = ({ style1 }) => {
-  const urlpost = "https://rebuild-intern-bcc.herokuapp.com/article/category";
-  const urlget = "https://rebuild-intern-bcc.herokuapp.com/article";
   const [search, setSearch] = useState("");
   const [load, setLoad] = useState(true);
 
@@ -59,7 +57,7 @@ const Articles = ({ style1 }) => {
     setLoad(true);
 
     try {
-      const response = await Axios.get(urlget).then((res) => {
+      const response = await petlinkAPI.get("/article").then((res) => {
         setArticle(res.data.data);
       });
       setLoad(false);
@@ -88,9 +86,11 @@ const Articles = ({ style1 }) => {
   const handlePost = async () => {
     const values = { category: search };
     try {
-      const response = await Axios.post(urlpost, values).then((res) => {
-        setArticle(res.data.data);
-      });
+      const response = await petlinkAPI
+        .post("/article/category", values)
+        .then((res) => {
+          setArticle(res.data.data);
+        });
     } catch (error) {
       console.log(error);
     }
@@ -100,9 +100,11 @@ const Articles = ({ style1 }) => {
     const now = data;
     const values = { category: now };
     try {
-      const response = await Axios.post(urlpost, values).then((res) => {
-        setArticle(res.data.data);
-      });
+      const response = await petlinkAPI
+        .post("/article/category", values)
+        .then((res) => {
+          setArticle(res.data.data);
+        });
     } catch (error) {
       console.log(error);
     }

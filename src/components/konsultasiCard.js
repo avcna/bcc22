@@ -1,6 +1,5 @@
 import { Row, Col } from "antd";
 import { useEffect, useState } from "react";
-import Axios from "axios";
 import styled from "styled-components";
 import {
   Input,
@@ -15,6 +14,7 @@ import Bni from "../images/bni.png";
 import { useAuth } from "../config/Auth";
 import { Form, Upload, Button } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
+import { petlinkAPI } from "../config/api";
 
 export const NamaDok = styled.h3`
   font-family: Mulish;
@@ -65,10 +65,15 @@ export const Harga2 = styled.button`
   border: 2px solid #fff;
   outline: none;
   background-color: #ffb703;
+
   border-radius: 20px;
   font-family: Poppins;
   padding: 5px 20px;
   margin-top: 25px;
+
+  &:focus {
+    background-color: #fccf5d;
+  }
 `;
 
 export const BioHewan = () => {
@@ -82,10 +87,7 @@ export const BioHewan = () => {
 
   const handlePost = async () => {
     try {
-      const response = await Axios.post(
-        "https://17a2-103-108-23-19.ngrok.io/biodata",
-        { ...form }
-      );
+      const response = await petlinkAPI.post("/biodata", { ...form });
     } catch (error) {
       console.log(error);
     }
@@ -174,11 +176,10 @@ export const Dokter = ({
 }) => {
   const [dokter, setDokter] = useState([]);
   const [dokterSelected, setDokterSelected] = useState([]);
-  const urlget = "https://17a2-103-108-23-19.ngrok.io/doctor";
 
   const fetchDokter = async () => {
     try {
-      const response = await Axios.get(urlget).then((res) => {
+      const response = await petlinkAPI.get("/doctor").then((res) => {
         setDokter(res.data.data);
       });
     } catch (error) {
@@ -189,12 +190,11 @@ export const Dokter = ({
     const now = id;
     const values = { id: now };
     try {
-      const response = await Axios.post(
-        "https://17a2-103-108-23-19.ngrok.io/doctor/search",
-        values
-      ).then((res) => {
-        setDokterSelected(res.data.data);
-      });
+      const response = await petlinkAPI
+        .post("/doctor/search", values)
+        .then((res) => {
+          setDokterSelected(res.data.data);
+        });
     } catch (error) {
       console.log(error);
     }
@@ -263,12 +263,11 @@ export const Pembayaran = () => {
     formData.append("file", values.file.file.originFileObj);
     console.log(values);
     try {
-      const response = await Axios.post(
-        "https://17a2-103-108-23-19.ngrok.io/upload",
-        formData
-      ).then((res) => {
-        console.log(res);
-      });
+      const response = await petlinkAPI
+        .post("/upload", formData)
+        .then((res) => {
+          console.log(res);
+        });
     } catch (error) {
       console.log(error);
     }
@@ -383,17 +382,15 @@ export const Jam = () => {
     const now = value;
     const values = { jam_konsultasi: now };
     try {
-      const response = await Axios.post(
-        "https://17a2-103-108-23-19.ngrok.io/order/time",
-        values,
-        {
+      const response = await petlinkAPI
+        .post("/order/time", values, {
           headers: {
             Authorization: `Bearer ${authToken}`,
           },
-        }
-      ).then((res) => {
-        setJam(res.data.data);
-      });
+        })
+        .then((res) => {
+          setJam(res.data.data);
+        });
     } catch (error) {
       console.log(error);
     }
