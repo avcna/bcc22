@@ -58,7 +58,7 @@ export const Harga = styled.button`
   font-family: Poppins;
   padding: 5px 20px;
   margin-top: 25px;
-  margin-left: 720px;
+  color: white;
 `;
 
 export const Harga2 = styled.button`
@@ -163,7 +163,7 @@ export const BioHewan = () => {
   );
 };
 
-export const Dokter = () => {
+export const Dokter = ({ passData }) => {
   const [dokter, setDokter] = useState([]);
   const [dokterSelected, setDokterSelected] = useState([]);
 
@@ -233,9 +233,10 @@ export const Dokter = () => {
                       id={id}
                       onClick={(value) => {
                         clicked(id);
+                        passData(id);
                       }}
                     >
-                      {price}/Jam
+                      {price}000/Jam
                     </Harga>
                   </center>
                 </DocterCard>
@@ -351,7 +352,22 @@ export const Pembayaran = () => {
   );
 };
 
-export const Konfirmasi = () => {
+export const Konfirmasi = ({ id }) => {
+  const [link, setLink] = useState([]);
+  const fetchLinkDokter = async () => {
+    try {
+      const response = await petlinkAPI.get(`/doctor/${id}`).then((res) => {
+        setLink(res.data.data);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchLinkDokter();
+  }, []);
+
   return (
     <Wrapper>
       <DocterCard>
@@ -362,8 +378,8 @@ export const Konfirmasi = () => {
           <br />
         </JudulPembayaran>
         Tautan konsultasi :{" "}
-        <a target="_blank" href="https://meet.google.com/uav-kdzi-dzo">
-          https://meet.google.com/uav-kdzi-dzo
+        <a key={link.id} target="_blank" href={link.meet}>
+          {link.meet}
         </a>
       </DocterCard>
     </Wrapper>

@@ -12,38 +12,44 @@ import {
 } from "../components/konsultasiCard";
 import Cal from "../components/konsultasiCalendar";
 import Footer from "../components/Footer";
+import { useState } from "react";
 
 const { Step } = Steps;
 
-const steps = [
-  {
-    title: "Konsultasi sekarang",
-    content: <BioHewan />,
-  },
-  {
-    title: "Pilih Doktermu",
-    content: <Dokter />,
-  },
-  {
-    title: "Tentukan Jadwal",
-    content: (
-      <>
-        <Cal />
-        <Jam />
-      </>
-    ),
-  },
-  {
-    title: "Pembayaran",
-    content: <Pembayaran />,
-  },
-  {
-    title: "Konfirmasi",
-    content: <Konfirmasi />,
-  },
-];
-
 export const Konsultasi = () => {
+  const [link, setLink] = useState("");
+
+  const passData = (link) => {
+    setLink(link);
+  };
+  const steps = [
+    {
+      title: "Konsultasi sekarang",
+      content: <BioHewan />,
+    },
+    {
+      title: "Pilih Doktermu",
+      content: <Dokter passData={passData} />,
+    },
+    {
+      title: "Tentukan Jadwal",
+      content: (
+        <>
+          <Cal />
+          <Jam />
+        </>
+      ),
+    },
+    {
+      title: "Pembayaran",
+      content: <Pembayaran />,
+    },
+    {
+      title: "Konfirmasi",
+      content: <Konfirmasi id={link} />,
+    },
+  ];
+
   const [current, setCurrent] = React.useState(0);
 
   const next = () => {
