@@ -90,7 +90,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const loginResponse = await petlinkAPI.post("/login", {
+      const loginResponse = await petlinkAPI.post("/user/login", {
         ...forms,
       });
       console.log(loginResponse);
