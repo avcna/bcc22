@@ -6,6 +6,7 @@ import { useAuth } from "../config/Auth";
 import Logo from "../images/logo.png";
 import Footer from "../components/Footer";
 import { petlinkAPI } from "../config/api";
+import { useEffect } from "react";
 
 export const FormWrapper = styled.section`
   width: 806px;
@@ -82,6 +83,13 @@ export const P = styled.p`
 `;
 
 const Login = () => {
+  useEffect(() => {
+    const initialValue = document.body.style.zoom;
+    document.body.style.zoom = "90%";
+    return () => {
+      document.body.style.zoom = initialValue;
+    };
+  }, []);
   const { setAndGetTokens } = useAuth();
   const navigate = useNavigate();
   const [forms, setForms] = useState({ email: "", password: "" });

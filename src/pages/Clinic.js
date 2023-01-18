@@ -56,7 +56,14 @@ export const PaginationWrapper = styled.div`=
   margin: 5rem 0 4rem;
 `;
 
-const Clinic = ({ id, name, phone_number, address, link_google_maps }) => {
+const Clinic = () => {
+  useEffect(() => {
+    const initialValue = document.body.style.zoom;
+    document.body.style.zoom = "90%";
+    return () => {
+      document.body.style.zoom = initialValue;
+    };
+  }, []);
   const [search, setSearch] = useState("");
   const [load, setLoad] = useState(true);
   const [isEmpty, setEmpty] = useState(false);

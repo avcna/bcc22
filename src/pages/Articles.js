@@ -50,6 +50,14 @@ export const ArticleTitle = styled.p`
 `;
 
 const Articles = ({ style1 }) => {
+  useEffect(() => {
+    const initialValue = document.body.style.zoom;
+    document.body.style.zoom = "90%";
+    return () => {
+      document.body.style.zoom = initialValue;
+    };
+  }, []);
+
   const [search, setSearch] = useState("");
   const [load, setLoad] = useState(true);
 

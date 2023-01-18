@@ -16,8 +16,16 @@ import { useAuth } from "../config/Auth";
 import Footer from "../components/Footer";
 import Logo from "../images/logo.png";
 import { petlinkAPI } from "../config/api";
+import { useEffect } from "react";
 
 const Signup = () => {
+  useEffect(() => {
+    const initialValue = document.body.style.zoom;
+    document.body.style.zoom = "90%";
+    return () => {
+      document.body.style.zoom = initialValue;
+    };
+  }, []);
   const { setAndGetTokens } = useAuth();
   const navigate = useNavigate();
   const [forms, setForms] = useState({

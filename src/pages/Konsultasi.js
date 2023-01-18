@@ -13,10 +13,18 @@ import {
 import Cal from "../components/konsultasiCalendar";
 import Footer from "../components/Footer";
 import { useState } from "react";
+import { useEffect } from "react";
 
 const { Step } = Steps;
 
 export const Konsultasi = () => {
+  useEffect(() => {
+    const initialValue = document.body.style.zoom;
+    document.body.style.zoom = "90%";
+    return () => {
+      document.body.style.zoom = initialValue;
+    };
+  }, []);
   const [link, setLink] = useState("");
 
   const passData = (link) => {
