@@ -2,16 +2,16 @@ import { DivSearch, Img, SearchInput } from "../components/ClinicElement";
 import searchIcon from "../images/magnifying-glass.png";
 import Footer from "../components/Footer";
 import { Title } from "../components/Basic";
-import { Style1 } from "../components/ArtikelElements";
+import { Article } from "../components/ArtikelElements";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import "../App.css";
-import Pagination from "../components/pagination";
 import { PaginationWrapper } from "./Clinic";
 import { Paging } from "./Clinic";
 import Loading from "../components/loading";
 import { petlinkAPI } from "../config/api";
+import { article } from "../data/article/article";
 
 export const Button = styled.button`
   background-color: #ffb703;
@@ -49,35 +49,35 @@ export const ArticleTitle = styled.p`
   color: #ffb703;
 `;
 
-const Articles = ({ style1 }) => {
-  useEffect(() => {
-    const initialValue = document.body.style.zoom;
-    document.body.style.zoom = "90%";
-    return () => {
-      document.body.style.zoom = initialValue;
-    };
-  }, []);
+const Articles = () => {
+  const [articles, setArticle] = useState(article);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(5);
+
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = articles.slice(indexOfFirstPost, indexOfLastPost);
 
   const [search, setSearch] = useState("");
-  const [load, setLoad] = useState(true);
+  // const [load, setLoad] = useState(true);
 
-  const fetchArticle = async () => {
-    setLoad(true);
+  // const fetchArticle = async () => {
+  //   setLoad(true);
 
-    try {
-      const response = await petlinkAPI.get("/article").then((res) => {
-        setArticle(res.data.data);
-      });
-      setLoad(false);
-    } catch (error) {
-      setLoad(false);
-      console.log(error);
-    }
-  };
+  //   try {
+  //     const response = await petlinkAPI.get("/article").then((res) => {
+  //       setArticle(res.data.data);
+  //     });
+  //     setLoad(false);
+  //   } catch (error) {
+  //     setLoad(false);
+  //     console.log(error);
+  //   }
+  // };
 
-  useEffect(() => {
-    fetchArticle();
-  }, []);
+  // useEffect(() => {
+  //   fetchArticle();
+  // }, []);
 
   function handle(event) {
     setSearch(event.target.value);
@@ -94,37 +94,33 @@ const Articles = ({ style1 }) => {
   const handlePost = async () => {
     const values = { category: search };
     try {
-      const response = await petlinkAPI
-        .post("/article/category", values)
-        .then((res) => {
-          setArticle(res.data.data);
-        });
+      const response = await petlinkAPI.post("/article/category", values).then((res) => {
+        setArticle(res.data.data);
+      });
     } catch (error) {
       console.log(error);
     }
   };
 
-  const clicked = async (data) => {
-    const now = data;
-    const values = { category: now };
-    try {
-      const response = await petlinkAPI
-        .post("/article/category", values)
-        .then((res) => {
-          setArticle(res.data.data);
-        });
-    } catch (error) {
-      console.log(error);
-    }
+  const clicked = (kategori) => {
+    // tambahkan async pada function
+
+    // const kategori = data;
+    // const values = { category: kategori };
+    // try {
+    //   const response = await petlinkAPI.post("/article/category", values).then((res) => {
+    //     setArticle(res.data.data);
+    //   });
+    // } catch (error) {
+    //   console.log(error);
+    // }
+
+    const newData = article.filter((data) => {
+      return data.kategori == kategori;
+    });
+
+    setArticle(newData);
   };
-
-  const [article, setArticle] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(5);
-
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = article.slice(indexOfFirstPost, indexOfLastPost);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -225,18 +221,23 @@ const Articles = ({ style1 }) => {
         <Kategori>
           <Title>Artikel Terkini</Title>
         </Kategori>
-        {load && <Loading></Loading>}
-        {currentPosts.map((currentPosts) => {
-          const { id, title, content, image, category } = currentPosts;
-          return <Style1 key={currentPosts.id} {...currentPosts}></Style1>;
+        {/* {load && <Loading></Loading>} */}
+        {currentPosts.map((currentPosts, i) => {
+          const { id, kategori, foto, judul, deskripsi } = currentPosts;
+          return (
+            <Article
+              key={i}
+              content={deskripsi}
+              image={foto}
+              category={kategori}
+              title={judul}
+              id={id}
+            />
+          );
         })}
 
         <PaginationWrapper>
-          <Paging
-            postsPerPage={postsPerPage}
-            totalPosts={article.length}
-            paginate={paginate}
-          />
+          <Paging postsPerPage={postsPerPage} totalPosts={article.length} paginate={paginate} />
         </PaginationWrapper>
 
         <Footer />

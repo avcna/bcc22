@@ -10,6 +10,7 @@ import Signup from "./pages/Signup";
 import { useEffect, useState } from "react";
 import { AuthContext } from "./config/Auth";
 import { PrivateRoute, RestrictedRoute } from "./config/PrivateRoute";
+import ArticleDetail from "./pages/ArticleDetail";
 
 function App() {
   const isAnyToken = JSON.parse(localStorage.getItem("token"));
@@ -31,6 +32,7 @@ function App() {
           <Route path="/Home" element={<Home />} />
           <Route path="/Klinik" element={<Klinik />} />
           <Route path="/Artikel" element={<Articles />} />
+          <Route path="/Artikel/:id" element={<ArticleDetail />} />
           <Route
             path="/Login"
             element={
