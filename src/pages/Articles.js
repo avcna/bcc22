@@ -49,6 +49,18 @@ export const ArticleTitle = styled.p`
   color: #ffb703;
 `;
 
+const filterButton = [
+  "Kucing",
+  "Kelinci",
+  "Hamster",
+  "Ikan",
+  "Reptil",
+  "Perawatan",
+  "Kesehatan",
+  "Penanganan Pertama",
+  "Burung",
+];
+
 const Articles = () => {
   const [articles, setArticle] = useState(article);
   const [currentPage, setCurrentPage] = useState(1);
@@ -116,7 +128,7 @@ const Articles = () => {
     // }
 
     const newData = article.filter((data) => {
-      return data.kategori == kategori;
+      return data.kategori === kategori;
     });
 
     setArticle(newData);
@@ -145,76 +157,18 @@ const Articles = () => {
         </div>
         <Kategori>
           <Title>Kategori</Title>
-          <Button
-            onClick={(value) => {
-              clicked("Kucing");
-            }}
-          >
-            Kucing
-          </Button>
-          <Button
-            onClick={(value) => {
-              clicked("Anjing");
-            }}
-          >
-            Anjing
-          </Button>
-          <Button
-            onClick={(value) => {
-              clicked("Kelinci");
-            }}
-          >
-            Kelinci
-          </Button>
-          <Button
-            onClick={(value) => {
-              clicked("Hamster");
-            }}
-          >
-            Hamster
-          </Button>
-          <Button
-            onClick={(value) => {
-              clicked("Ikan");
-            }}
-          >
-            Ikan
-          </Button>
-          <Button
-            onClick={(value) => {
-              clicked("Reptil");
-            }}
-          >
-            Reptil
-          </Button>
-          <Button
-            onClick={(value) => {
-              clicked("Perawatan");
-            }}
-          >
-            Perawatan
-          </Button>
-          <Button
-            onClick={(value) => {
-              clicked("Kesehatan");
-            }}
-          >
-            Kesehatan
-          </Button>
-          <Button
-            onClick={(value) => {
-              clicked("Penanganan pertama");
-            }}
-          >
-            Penanganan Pertama
-          </Button>
-          <Button
-            onClick={(value) => {
-              clicked("Burung");
-            }}
-          >
-            Burung
-          </Button>
+          {filterButton.map((button, i) => {
+            return (
+              <Button
+                key={i}
+                onClick={() => {
+                  clicked(button);
+                }}
+              >
+                {button}
+              </Button>
+            );
+          })}
         </Kategori>
       </section>
       <section>
@@ -237,7 +191,7 @@ const Articles = () => {
         })}
 
         <PaginationWrapper>
-          <Paging postsPerPage={postsPerPage} totalPosts={article.length} paginate={paginate} />
+          <Paging postsPerPage={postsPerPage} totalPosts={articles.length} paginate={paginate} />
         </PaginationWrapper>
 
         <Footer />
