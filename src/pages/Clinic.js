@@ -1,4 +1,4 @@
-import {
+import ClinicCard, {
   Card,
   DivSearch,
   Img,
@@ -14,10 +14,9 @@ import searchIcon from "../images/magnifying-glass.png";
 import Pagination from "../components/pagination";
 import Loading from "../components/loading";
 import "../App.css";
-import Phone from "../images/phone.png";
-import Map from "../images/map.png";
 import Navbar from "../components/Navbar";
 import { petlinkAPI } from "../config/api";
+import { clinic } from "../data/clinic/clinic";
 
 export const Title2 = styled(Title)`
   padding: 81px 165px 30px;
@@ -26,17 +25,6 @@ export const Title2 = styled(Title)`
 export const Title3 = styled(Title)`
   padding: 81px 165px 30px;
   color: red;
-`;
-
-export const A = styled.a`
-  color: #ffb703;
-  text-decoration: none;
-  text-align: right;
-
-  &:hover {
-    color: #ffb703;
-    text-decoration: underline;
-  }
 `;
 
 export const Paging = styled(Pagination)`
@@ -57,34 +45,27 @@ export const PaginationWrapper = styled.div`=
 `;
 
 const Clinic = () => {
-  useEffect(() => {
-    const initialValue = document.body.style.zoom;
-    document.body.style.zoom = "90%";
-    return () => {
-      document.body.style.zoom = initialValue;
-    };
-  }, []);
   const [search, setSearch] = useState("");
   const [load, setLoad] = useState(true);
   const [isEmpty, setEmpty] = useState(false);
 
-  const fetchClinic = async () => {
-    setLoad(true);
+  // const fetchClinic = async () => {
+  //   setLoad(true);
 
-    try {
-      const response = await petlinkAPI.get("/clinic").then((res) => {
-        setClinic(res.data.data);
-      });
-      setLoad(false);
-    } catch (error) {
-      setLoad(false);
-      console.log(error);
-    }
-  };
+  //   try {
+  //     const response = await petlinkAPI.get("/clinic").then((res) => {
+  //       setClinic(res.data.data);
+  //     });
+  //     setLoad(false);
+  //   } catch (error) {
+  //     setLoad(false);
+  //     console.log(error);
+  //   }
+  // };
 
-  useEffect(() => {
-    fetchClinic();
-  }, []);
+  // useEffect(() => {
+  //   fetchClinic();
+  // }, []);
 
   function handle(event) {
     setSearch(event.target.value);
@@ -99,24 +80,22 @@ const Clinic = () => {
   const handlePost = async () => {
     const values = { location: search };
     try {
-      const response = await petlinkAPI
-        .post("/clinic/search", values)
-        .then((res) => {
-          setClinic(res.data.data);
-        });
+      const response = await petlinkAPI.post("/clinic/search", values).then((res) => {
+        setClinic(res.data.data);
+      });
     } catch (error) {
       console.log(error);
     }
   };
 
-  const [clinic, setClinic] = useState([]);
+  const [clinics, setClinic] = useState(clinic);
   const [nama, setNama] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(10);
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = clinic.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = clinics.slice(indexOfFirstPost, indexOfLastPost);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -142,32 +121,23 @@ const Clinic = () => {
       </section>
       <section>
         <Title2>Daftar Klinik Hewan</Title2>
-        {load && <Loading></Loading>}
+        {/* {load && <Loading></Loading>} */}
         {currentPosts.map((currentPosts) => {
-          const { id, name, phone_number, address, link_google_maps } =
-            currentPosts;
+          const { id, name, img, phone_number, address, link_google_maps } = currentPosts;
           return (
-            <Card key={currentPosts.id} {...currentPosts}>
-              <ClinicName>{name}</ClinicName>
-              <Icon src={Phone} />
-              {phone_number} <br />
-              <Icon src={Map} />
-              {address}
-              <br />
-              <A target="_blank" href={link_google_maps}>
-                {" "}
-                Lihat di map
-              </A>
-            </Card>
+            <ClinicCard
+              key={id}
+              name={name}
+              img={img}
+              phone_number={phone_number}
+              address={address}
+              link_google_maps={link_google_maps}
+            />
           );
         })}
 
         <PaginationWrapper>
-          <Paging
-            postsPerPage={postsPerPage}
-            totalPosts={clinic.length}
-            paginate={paginate}
-          />
+          <Paging postsPerPage={postsPerPage} totalPosts={clinics.length} paginate={paginate} />
         </PaginationWrapper>
 
         <Footer />

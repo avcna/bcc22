@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import searchIcon from "../images/magnifying-glass.png";
-import App from "../App";
+import Phone from "../images/phone.png";
+import Map from "../images/map.png";
 
 export const Card = styled.section`
   font-size: 16px;
@@ -10,6 +10,7 @@ export const Card = styled.section`
   margin: 0 165px 30px;
   font-family: Poppins;
   border-radius: 30px;
+  display: flex;
 `;
 
 export const DivSearch = styled.div`
@@ -47,3 +48,41 @@ export const Warn = styled.p`
   color: red;
   font-family: Poppins;
 `;
+
+export const A = styled.a`
+  color: #ffb703;
+  text-decoration: none;
+  text-align: right;
+
+  &:hover {
+    color: #ffb703;
+    text-decoration: underline;
+  }
+`;
+
+export const Icon = styled.img`
+  margin-right: 21px;
+  height: 17px;
+`;
+
+const ClinicCard = ({ name, img, phone_number, address, link_google_maps }) => {
+  return (
+    <Card>
+      <img src={img} style={{ borderRadius: "30px" }} />
+      <div style={{ paddingLeft: "56px" }}>
+        <ClinicName>{name}</ClinicName>
+        <Icon src={Phone} />
+        {phone_number} <br />
+        <Icon src={Map} />
+        {address}
+        <br />
+        <A target="_blank" href={link_google_maps}>
+          {" "}
+          Lihat di map
+        </A>
+      </div>
+    </Card>
+  );
+};
+
+export default ClinicCard;
