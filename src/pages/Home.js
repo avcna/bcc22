@@ -11,7 +11,7 @@ import Foto3 from "../images/foto3.png";
 import Kucing from "../images/kucing.png";
 import { Carouseli } from "../components/ArtikelElements";
 import Navbar from "../components/Navbar";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export const Section = styled.section`
   background-color: #fff;
@@ -19,13 +19,6 @@ export const Section = styled.section`
 `;
 
 const Home = () => {
-  useEffect(() => {
-    const initialValue = document.body.style.zoom;
-    document.body.style.zoom = "90%";
-    return () => {
-      document.body.style.zoom = initialValue;
-    };
-  }, []);
   return (
     <>
       <div className="nav-div">
@@ -38,10 +31,9 @@ const Home = () => {
             <strong>Tentang Kami</strong>
           </h1>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras et
-            nunc purus. Curabitur nec eros felis. Integer congue felis nulla,
-            vitae vestibulum neque malesuada et. Vivamus suscipit neque non
-            convallis dictum.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras et nunc purus. Curabitur
+            nec eros felis. Integer congue felis nulla, vitae vestibulum neque malesuada et. Vivamus
+            suscipit neque non convallis dictum.
           </p>
         </div>
         <center>
@@ -56,11 +48,10 @@ const Home = () => {
               <br />
               <div className="content-why-us">
                 <p>
-                  Lorem Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy text ever since the 1500s, when an unknown
-                  printer took a galley of type and scrambled it to make a type
-                  specimen book.
+                  Lorem Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                  Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when
+                  an unknown printer took a galley of type and scrambled it to make a type specimen
+                  book.
                 </p>
               </div>
             </Col>
@@ -71,11 +62,10 @@ const Home = () => {
               <br />
               <div className="content-why-us">
                 <p>
-                  Lorem Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy text ever since the 1500s, when an unknown
-                  printer took a galley of type and scrambled it to make a type
-                  specimen book.
+                  Lorem Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                  Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when
+                  an unknown printer took a galley of type and scrambled it to make a type specimen
+                  book.
                 </p>
               </div>
             </Col>
@@ -86,11 +76,10 @@ const Home = () => {
               <br />
               <div className="content2-why-us">
                 <p>
-                  Lorem Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy text ever since the 1500s, when an unknown
-                  printer took a galley of type and scrambled it to make a type
-                  specimen book.
+                  Lorem Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                  Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when
+                  an unknown printer took a galley of type and scrambled it to make a type specimen
+                  book.
                 </p>
               </div>
             </Col>
@@ -99,9 +88,7 @@ const Home = () => {
       </section>
       <section>
         <div className="konsul">
-          <h1 className="konsul-home">
-            Konsultasikan Hewan Peliharaanmu Sekarang!
-          </h1>
+          <h1 className="konsul-home">Konsultasikan Hewan Peliharaanmu Sekarang!</h1>
         </div>
         <Link to="/Konsultasi">
           <button className="btna" href="#">

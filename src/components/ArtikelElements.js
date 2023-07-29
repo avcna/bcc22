@@ -4,6 +4,7 @@ import Carousel from "react-bootstrap/Carousel";
 import { useState } from "react";
 import { Row, Col } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
+import { article } from "../data/article/article";
 
 export const ArticleCard = styled.div`
   background-color: #023047;
@@ -75,15 +76,21 @@ export const Carouseli = () => {
   return (
     <>
       <Carousel>
-        <Carousel.Item>
-          <CarItem>test</CarItem>
-        </Carousel.Item>
-        <Carousel.Item>
-          <CarItem>test</CarItem>
-        </Carousel.Item>
-        <Carousel.Item>
-          <CarItem>test</CarItem>
-        </Carousel.Item>
+        {article.slice(0, 3).map((data) => {
+          const { id, kategori, foto, judul, deskripsi } = data;
+          return (
+            <Carousel.Item>
+              <Article
+                key={id}
+                content={deskripsi}
+                image={foto}
+                category={kategori}
+                title={judul}
+                id={id}
+              />
+            </Carousel.Item>
+          );
+        })}
       </Carousel>
     </>
   );
@@ -99,7 +106,7 @@ export const Article = ({ id, title, content, image, category }) => {
           <Category>{category}</Category>
           <ArticleTitle>{title}</ArticleTitle>
           <Content>{content.substring(0, 400)}...</Content>
-          <NavLink to={`${id}`}>
+          <NavLink to={`/Artikel/${id}`}>
             <Btn
               onClick={() => {
                 setReadMore(!readMore);

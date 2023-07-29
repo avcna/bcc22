@@ -1,11 +1,4 @@
-import ClinicCard, {
-  Card,
-  DivSearch,
-  Img,
-  SearchInput,
-  Klinik,
-  ClinicName,
-} from "../components/ClinicElement";
+import ClinicCard, { DivSearch, Img, SearchInput } from "../components/ClinicElement";
 import { Section, Title } from "../components/Basic";
 import styled from "styled-components";
 import Footer from "../components/Footer";

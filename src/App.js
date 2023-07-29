@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { AuthContext } from "./config/Auth";
 import { PrivateRoute, RestrictedRoute } from "./config/PrivateRoute";
 import ArticleDetail from "./pages/ArticleDetail";
+import { RecoilRoot } from "recoil";
 
 function App() {
   const isAnyToken = JSON.parse(localStorage.getItem("token"));
@@ -25,41 +26,43 @@ function App() {
     setUser(id);
   };
   return (
-    <AuthContext.Provider value={{ authToken, setAndGetTokens, user }}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" exact element={<Home />} />
-          <Route path="/Home" element={<Home />} />
-          <Route path="/Klinik" element={<Klinik />} />
-          <Route path="/Artikel" element={<Articles />} />
-          <Route path="/Artikel/:id" element={<ArticleDetail />} />
-          <Route
-            path="/Login"
-            element={
-              <RestrictedRoute>
-                <Login />
-              </RestrictedRoute>
-            }
-          />
-          <Route
-            path="/Signup"
-            element={
-              <RestrictedRoute>
-                <Signup />
-              </RestrictedRoute>
-            }
-          />
-          <Route
-            path="/Konsultasi"
-            element={
-              <PrivateRoute>
-                <Konsultasi />
-              </PrivateRoute>
-            }
-          />
-        </Routes>
-      </BrowserRouter>
-    </AuthContext.Provider>
+    <RecoilRoot>
+      <AuthContext.Provider value={{ authToken, setAndGetTokens, user }}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" exact element={<Home />} />
+            <Route path="/Home" element={<Home />} />
+            <Route path="/Klinik" element={<Klinik />} />
+            <Route path="/Artikel" element={<Articles />} />
+            <Route path="/Artikel/:id" element={<ArticleDetail />} />
+            <Route
+              path="/Login"
+              element={
+                <RestrictedRoute>
+                  <Login />
+                </RestrictedRoute>
+              }
+            />
+            <Route
+              path="/Signup"
+              element={
+                <RestrictedRoute>
+                  <Signup />
+                </RestrictedRoute>
+              }
+            />
+            <Route
+              path="/Konsultasi"
+              element={
+                <PrivateRoute>
+                  <Konsultasi />
+                </PrivateRoute>
+              }
+            />
+          </Routes>
+        </BrowserRouter>
+      </AuthContext.Provider>
+    </RecoilRoot>
   );
 }
 
